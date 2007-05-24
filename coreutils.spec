@@ -7,7 +7,7 @@ Version: 5.97
 Release: %mkrel 6
 License: GPL
 Group:   System/Base
-Url:     ftp://alpha.gnu.org/gnu/coreutils/
+Url:     http://www.gnu.org/software/coreutils/
 BuildRequires: acl-devel
 
 Source0: ftp://prep.ai.mit.edu/pub/gnu/%name/%name-%version.tar.bz2
