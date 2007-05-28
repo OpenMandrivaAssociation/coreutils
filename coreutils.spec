@@ -8,7 +8,6 @@ Release: %mkrel 6
 License: GPL
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
-BuildRequires: acl-devel
 
 Source0: ftp://prep.ai.mit.edu/pub/gnu/%name/%name-%version.tar.bz2
 Source101:	DIR_COLORS
@@ -97,9 +96,9 @@ Summary: Coreutils documentation in info format
 Group: Books/Computer books
 Requires: coreutils >= 4.5.4-2mdk
 Requires(pre): /sbin/install-info
- # it here indefinitely.
+
 %description doc
-This package
+This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
