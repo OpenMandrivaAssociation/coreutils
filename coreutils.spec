@@ -55,9 +55,12 @@ Patch1002: coreutils-acl+posix.diff
 Patch1003: coreutils-xattr.diff
 Patch1004: coreutils-xattr-va-list.diff
 
+#(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
+Patch1010: coreutils-5.97-lzma-ls-coloring.patch
+
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel texinfo >= 4.3
-BuildRequires:	automake1.9
+BuildRequires:	automake == 1.10
 BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
 
@@ -136,13 +139,15 @@ mv po/{lg,lug}.po
 %patch1003 -p1 -b .xattr
 %patch1004 -p0 -b .xattr-va
 
+%patch1010 -p1 -b .lzma
+
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
 
 %build
 export DEFAULT_POSIX2_VERSION=199209
-aclocal-1.9 -I m4
-automake-1.9 --gnits 
+aclocal-1.10 -I m4
+automake-1.10 --gnits --add-missing
 autoconf
 %configure2_5x --enable-largefile --enable-pam
 %make HELP2MAN=$PWD/man/help2man
@@ -201,16 +206,17 @@ done
 
 install -m 644 %SOURCE200 $RPM_BUILD_ROOT%_sysconfdir/pam.d/su
 
-bzip2 -f9 old/*/C* || :
+bzip2 -9f old/*/C* || :
 
 # fix conflict with util-linux:
 rm -f $RPM_BUILD_ROOT%_mandir/man1/kill.1
 
-%find_lang %name
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 #TV(cd $RPM_BUILD_ROOT; find .%_datadir/locale/ -name coreutils.mo | fgrep LC_TIME | \
 #TV	sed -e "s!^.*/share/locale/\([^/]*\)/!%lang(\1) %_datadir/locale/\1/!") >> %name.lang
 find $RPM_BUILD_ROOT%_datadir/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
+
+%find_lang %name
 
 # (sb) Deal with Installed (but unpackaged) file(s) found
 rm -f $RPM_BUILD_ROOT%{_datadir}/info/dir
