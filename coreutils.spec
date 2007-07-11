@@ -4,14 +4,14 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 5.97
-Release: %mkrel 7
+Release: %mkrel 8
 License: GPL
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
 Source0: ftp://prep.ai.mit.edu/pub/gnu/%name/%name-%version.tar.bz2
-Source101:	DIR_COLORS
-Source102:  DIR_COLORS.xterm
+#Source101:	DIR_COLORS
+#Source102:  DIR_COLORS.xterm
 Source200:  su.pamd
 Source201:  help2man
 
@@ -57,6 +57,7 @@ Patch1004: coreutils-xattr-va-list.diff
 
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
 Patch1010: coreutils-5.97-lzma-ls-coloring.patch
+Patch1011: coreutils-5.97-DIR_COLORS-mdkconf.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel texinfo >= 4.3
@@ -139,7 +140,8 @@ mv po/{lg,lug}.po
 %patch1003 -p1 -b .xattr
 %patch1004 -p0 -b .xattr-va
 
-%patch1010 -p1 -b .lzma
+%patch1010 -p1 -b .lzma_colors
+%patch1011 -p1 -b .colors_mdkconf
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
@@ -194,7 +196,7 @@ mv $RPM_BUILD_ROOT/{%_bindir,%_sbindir}/chroot
 # {cat,sort,cut} were previously moved from bin to /usr/bin and linked into 
 for i in env cut; do ln -sf ../../bin/$i $RPM_BUILD_ROOT/usr/bin; done
 
-install -c -m644 %SOURCE101 $RPM_BUILD_ROOT/etc/
+install -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 
 # su
 install -m 4755 src/su $RPM_BUILD_ROOT/bin
