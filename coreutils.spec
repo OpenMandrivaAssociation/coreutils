@@ -15,7 +15,6 @@ Source201:  help2man
 
 # fileutils
 Patch101: coreutils-5.93-spacedir.patch
-Patch102: coreutils-5.1.1-sparc.patch
 Patch107: fileutils-4.1.10-timestyle.patch
 Patch1155: coreutils-5.97-force-option--override--interactive-option.patch
 Patch118: fileutils-4.1-ls_h.patch
@@ -105,7 +104,6 @@ This package contains coreutils documentation in GNU info format.
 
 # fileutils
 %patch101 -p1 -b .space
-#%patch102 -p1 -b .sparc
 #%patch107 -p1 -b .timestyle
 #%patch1155 -p1 -b .override
 %patch118 -p1
