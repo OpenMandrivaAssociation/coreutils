@@ -13,8 +13,6 @@ Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.bz2
 Source200:  su.pamd
 Source201:  help2man
 
-Patch0:		coreutils-4.5.4-lug.patch
-
 # fileutils
 Patch101: coreutils-5.93-spacedir.patch
 Patch102: coreutils-5.1.1-sparc.patch
@@ -104,9 +102,6 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
-
-#%patch0 -p1 -b .lug
-#mv po/{lg,lug}.po
 
 # fileutils
 %patch101 -p1 -b .space
