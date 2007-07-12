@@ -10,8 +10,6 @@ Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
 Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.bz2
-#Source101:	DIR_COLORS
-#Source102:  DIR_COLORS.xterm
 Source200:  su.pamd
 Source201:  help2man
 
