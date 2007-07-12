@@ -26,7 +26,7 @@ Patch704: sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706: coreutils-5.93-pam.patch
+Patch706: coreutils-6.9-pam.patch
 Patch711: sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
@@ -113,7 +113,7 @@ This package contains coreutils documentation in GNU info format.
 # sh-utils
 %patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
-#%patch706 -p1 -b .pam
+%patch706 -p1 -b .pam
 
 # li18nux/lsb
 #%patch800 -p1 -b .i18n
