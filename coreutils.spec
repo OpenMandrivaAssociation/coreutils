@@ -119,7 +119,7 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
-#%patch1012 -p1 -b .ls-x
+%patch1012 -p1 -b .ls-x
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
@@ -137,7 +137,8 @@ perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreut
 
 %check
 # Fix the test suite:
-chmod +x ./tests/sort/sort-tests
+chmod a+x tests/sort/sort-mb-tests
+chmod a+x tests/ls/x-option
 # Run the test suite:
 %make check
 
