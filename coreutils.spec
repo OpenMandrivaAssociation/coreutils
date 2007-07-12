@@ -33,7 +33,7 @@ Patch711: sh-utils-2.0.12-hname.patch
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-5.97-new-i18n.patch
+Patch800: coreutils-6.9-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
