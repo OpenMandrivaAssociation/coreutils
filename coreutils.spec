@@ -15,7 +15,7 @@ Source201:  help2man
 
 # fileutils
 Patch101: coreutils-5.93-spacedir.patch
-Patch1155: coreutils-5.97-force-option--override--interactive-option.patch
+Patch1155: coreutils-6.9-force-option--override--interactive-option.patch
 Patch118: fileutils-4.1-ls_h.patch
 Patch152: coreutils-4.5.7-touch_errno.patch
 Patch500: textutils-2.0.17-mem.patch
@@ -103,7 +103,7 @@ This package contains coreutils documentation in GNU info format.
 
 # fileutils
 %patch101 -p1 -b .space
-#%patch1155 -p1 -b .override
+%patch1155 -p0 -b .override
 %patch118 -p1
 %patch152 -p1
 
