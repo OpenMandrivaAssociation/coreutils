@@ -3,8 +3,8 @@
 
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 5.97
-Release: %mkrel 8
+Version: 6.9
+Release: %mkrel 1
 License: GPL
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -107,14 +107,14 @@ This package contains coreutils documentation in GNU info format.
 %prep
 %setup -q
 
-%patch0 -p1 -b .lug
-mv po/{lg,lug}.po
+#%patch0 -p1 -b .lug
+#mv po/{lg,lug}.po
 
 # fileutils
 %patch101 -p1 -b .space
-%patch102 -p1 -b .sparc
-%patch107 -p1 -b .timestyle
-%patch1155 -p1 -b .override
+#%patch102 -p1 -b .sparc
+#%patch107 -p1 -b .timestyle
+#%patch1155 -p1 -b .override
 %patch118 -p1
 %patch152 -p1
 
@@ -124,10 +124,10 @@ mv po/{lg,lug}.po
 # sh-utils
 %patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
-%patch706 -p1 -b .pam
+#%patch706 -p1 -b .pam
 
 # li18nux/lsb
-%patch800 -p1 -b .i18n
+#%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
@@ -135,13 +135,13 @@ mv po/{lg,lug}.po
 %patch910 -p0 -b .cpu
 
 # posix acls and extended attributes
-%patch1001 -p1 -b .acl
-%patch1002 -p1 -b .acl+posix
-%patch1003 -p1 -b .xattr
-%patch1004 -p0 -b .xattr-va
+#%patch1001 -p1 -b .acl
+#%patch1002 -p1 -b .acl+posix
+#%patch1003 -p1 -b .xattr
+#%patch1004 -p0 -b .xattr-va
 
-%patch1010 -p1 -b .lzma_colors
-%patch1011 -p1 -b .colors_mdkconf
+#%patch1010 -p1 -b .lzma_colors
+#%patch1011 -p1 -b .colors_mdkconf
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
@@ -159,7 +159,7 @@ perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreut
 
 %check
 # Fix the test suite:
-chmod +x ./tests/sort/sort-mb-tests
+chmod +x ./tests/sort/sort-tests
 # Run the test suite:
 %make check
 
@@ -248,12 +248,11 @@ true
 %files -f %{name}.lang
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/D*
-%config(noreplace) /etc/pam.d/su
+%config(noreplace) %{_sysconfdir}/pam.d/su
 %doc README
 /bin/*
 %_bindir/*
 %_sbindir/chroot
-
 
 %files doc
 %defattr(-,root,root)
