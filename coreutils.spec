@@ -50,7 +50,7 @@ Patch1003: coreutils-xattr.diff
 Patch1004: coreutils-xattr-va-list.diff
 
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
-Patch1010: coreutils-5.97-lzma-ls-coloring.patch
+Patch1010: coreutils-6.9-lzma-ls-coloring.patch
 Patch1011: coreutils-5.97-DIR_COLORS-mdkconf.patch
 #(fwang): From fedora, fix ls -x
 Patch1012: coreutils-6.9-ls-x.patch
@@ -131,7 +131,7 @@ This package contains coreutils documentation in GNU info format.
 #%patch1003 -p1 -b .xattr
 #%patch1004 -p0 -b .xattr-va
 
-#%patch1010 -p1 -b .lzma_colors
+%patch1010 -p1 -b .lzma_colors
 #%patch1011 -p1 -b .colors_mdkconf
 #%patch1012 -p1 -b .ls-x
 
