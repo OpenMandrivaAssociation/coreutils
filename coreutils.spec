@@ -41,14 +41,6 @@ Patch904: coreutils-5.0.91-allow_old_options.patch
 Patch909: coreutils-5.1.0-64bit-fixes.patch
 Patch910: coreutils-5.2.1-uname.patch
 
-# posix acls and extended attributes
-# from http://ftp.opensuse.org/pub/opensuse/distribution/SL-OSS-factory/inst-source/suse/src/coreutils-5.97-4.src.rpm
-# this one is already merged in CVS:
-Patch1001: coreutils-acl.diff
-Patch1002: coreutils-acl+posix.diff
-Patch1003: coreutils-xattr.diff
-Patch1004: coreutils-xattr-va-list.diff
-
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
 Patch1010: coreutils-6.9-lzma-ls-coloring.patch
 Patch1011: coreutils-6.9-DIR_COLORS-mdkconf.patch
@@ -125,14 +117,8 @@ This package contains coreutils documentation in GNU info format.
 %patch909 -p1 -b .64bit
 %patch910 -p0 -b .cpu
 
-# posix acls and extended attributes
-#%patch1001 -p1 -b .acl
-#%patch1002 -p1 -b .acl+posix
-#%patch1003 -p1 -b .xattr
-#%patch1004 -p0 -b .xattr-va
-
 %patch1010 -p1 -b .lzma_colors
-#%patch1011 -p1 -b .colors_mdkconf
+%patch1011 -p1 -b .colors_mdkconf
 #%patch1012 -p1 -b .ls-x
 
 cp %SOURCE201 man/help2man
