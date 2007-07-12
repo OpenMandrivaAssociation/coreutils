@@ -133,7 +133,7 @@ This package contains coreutils documentation in GNU info format.
 
 #%patch1010 -p1 -b .lzma_colors
 #%patch1011 -p1 -b .colors_mdkconf
-%patch1012 -p1 -b .ls-x
+#%patch1012 -p1 -b .ls-x
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
