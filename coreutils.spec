@@ -9,7 +9,7 @@ License: GPL
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
-Source0: ftp://prep.ai.mit.edu/pub/gnu/%name/%name-%version.tar.bz2
+Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.bz2
 #Source101:	DIR_COLORS
 #Source102:  DIR_COLORS.xterm
 Source200:  su.pamd
@@ -260,5 +260,3 @@ true
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO old/*
 %_infodir/coreutils*
 %_mandir/man*/*
-
-
