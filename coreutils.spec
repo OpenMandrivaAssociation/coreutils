@@ -110,7 +110,7 @@ This package contains coreutils documentation in GNU info format.
 %patch706 -p1 -b .pam
 
 # li18nux/lsb
-#%patch800 -p1 -b .i18n
+%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
