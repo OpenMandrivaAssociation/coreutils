@@ -4,7 +4,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 6.9
-Release: %mkrel 1
+Release: %mkrel 2
 License: GPL
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -46,6 +46,8 @@ Patch1010: coreutils-6.9-lzma-ls-coloring.patch
 Patch1011: coreutils-6.9-DIR_COLORS-mdkconf.patch
 #(fwang): From fedora, fix ls -x
 Patch1012: coreutils-6.9-ls-x.patch
+#(peroyvind): add back always red blinking on broken symlinks
+Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel texinfo >= 4.3
@@ -120,6 +122,7 @@ This package contains coreutils documentation in GNU info format.
 %patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
 %patch1012 -p1 -b .ls-x
+%patch1013 -p1 -b .broken_blink
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
