@@ -130,6 +130,8 @@ This package contains coreutils documentation in GNU info format.
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
+chmod +w ./src/dircolors.h
+./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
 %build
 export DEFAULT_POSIX2_VERSION=199209
