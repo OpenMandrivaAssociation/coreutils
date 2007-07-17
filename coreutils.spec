@@ -42,7 +42,7 @@ Patch909: coreutils-5.1.0-64bit-fixes.patch
 Patch910: coreutils-5.2.1-uname.patch
 
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
-Patch1010: coreutils-6.9-lzma-ls-coloring.patch
+#Patch1010: coreutils-6.9-lzma-ls-coloring.patch
 Patch1011: coreutils-6.9-DIR_COLORS-mdkconf.patch
 #(fwang): From fedora, fix ls -x
 Patch1012: coreutils-6.9-ls-x.patch
@@ -122,7 +122,7 @@ This package contains coreutils documentation in GNU info format.
 %patch909 -p1 -b .64bit
 %patch910 -p0 -b .cpu
 
-%patch1010 -p1 -b .lzma_colors
+#%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
 %patch1012 -p1 -b .ls-x
 %patch1013 -p1 -b .broken_blink
