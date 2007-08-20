@@ -92,7 +92,7 @@ The following tools are included:
 Summary: Coreutils documentation in info format
 Group: Books/Computer books
 Requires: coreutils >= 4.5.4-2mdk
-Requires(pre): /sbin/install-info
+Requires(pre): info-install
 
 %description doc
 This package contains coreutils documentation in GNU info format.
