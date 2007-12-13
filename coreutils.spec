@@ -1,6 +1,3 @@
-# for sh-utils :
-%define optflags $RPM_OPT_FLAGS -D_GNU_SOURCE=1
-
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 6.9
@@ -138,7 +135,7 @@ export DEFAULT_POSIX2_VERSION=199209
 aclocal-1.10 -I m4
 automake-1.10 --gnits --add-missing
 autoconf
-%configure2_5x --enable-largefile --enable-pam
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam
 %make HELP2MAN=$PWD/man/help2man
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
