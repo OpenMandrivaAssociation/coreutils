@@ -48,7 +48,6 @@ Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 #(fwang): From fedora, Disambiguate futimens() from the glibc implementation
 Patch1014: coreutils-6.9-futimens.patch
 
-BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel texinfo >= 4.3
 BuildRequires:	automake == 1.10
 BuildRequires:	libacl-devel libattr-devel
