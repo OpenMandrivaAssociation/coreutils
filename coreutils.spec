@@ -1,12 +1,12 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 6.9
-Release: %mkrel 6
-License: GPL
+Version: 6.10
+Release: %mkrel 1
+License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
-Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.bz2
+Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.lzma
 Source200:  su.pamd
 Source201:  help2man
 
@@ -41,15 +41,12 @@ Patch910: coreutils-5.2.1-uname.patch
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
 #Patch1010: coreutils-6.9-lzma-ls-coloring.patch
 Patch1011: coreutils-6.9-DIR_COLORS-mdkconf.patch
-#(fwang): From fedora, fix ls -x
-Patch1012: coreutils-6.9-ls-x.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
-#(fwang): From fedora, Disambiguate futimens() from the glibc implementation
-Patch1014: coreutils-6.9-futimens.patch
 
 BuildRoot: %_tmppath/%{name}-root
-BuildRequires:	gettext termcap-devel pam-devel texinfo >= 4.3
+BuildRequires:	gettext termcap-devel pam-devel
+#BuildRequires:  texinfo >= 4.3
 BuildRequires:	automake == 1.10
 BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
@@ -109,21 +106,19 @@ This package contains coreutils documentation in GNU info format.
 # sh-utils
 %patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
-%patch706 -p1 -b .pam
+#%patch706 -p1 -b .pam
 
 # li18nux/lsb
-%patch800 -p1 -b .i18n
+#%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
 %patch909 -p1 -b .64bit
-%patch910 -p0 -b .cpu
+#%patch910 -p0 -b .cpu
 
 #%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
-%patch1012 -p1 -b .ls-x
 %patch1013 -p1 -b .broken_blink
-%patch1014 -p1 -b .futimens
 
 cp %SOURCE201 man/help2man
 chmod +x man/help2man
@@ -132,9 +127,9 @@ chmod +w ./src/dircolors.h
 
 %build
 export DEFAULT_POSIX2_VERSION=199209
-aclocal-1.10 -I m4
-automake-1.10 --gnits --add-missing
-autoconf
+#aclocal-1.10 -I m4
+#automake-1.10 --gnits --add-missing
+#autoconf
 CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam
 %make HELP2MAN=$PWD/man/help2man
 
@@ -142,9 +137,6 @@ CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enab
 perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
 
 %check
-# Fix the test suite:
-chmod a+x tests/sort/sort-mb-tests
-chmod a+x tests/ls/x-option
 # Run the test suite:
 %make check
 
