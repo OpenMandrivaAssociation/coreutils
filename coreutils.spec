@@ -30,7 +30,7 @@ Patch711: sh-utils-2.0.12-hname.patch
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-6.9-new-i18n.patch
+Patch800: coreutils-6.10-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -109,7 +109,7 @@ This package contains coreutils documentation in GNU info format.
 %patch706 -p1 -b .pam
 
 # li18nux/lsb
-#%patch800 -p1 -b .i18n
+%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
@@ -137,6 +137,7 @@ CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enab
 perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
 
 %check
+chmod a+x tests/sort/sort-mb-tests
 # Run the test suite:
 %make check
 
