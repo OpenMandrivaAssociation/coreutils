@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 6.10
-Release: %mkrel 1
+Release: %mkrel 2
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -46,7 +46,7 @@ Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
-#BuildRequires:  texinfo >= 4.3
+BuildRequires:  texinfo >= 4.3
 BuildRequires:	automake == 1.10
 BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
@@ -73,14 +73,14 @@ arbitrary limits.
 
 The following tools are included:
 
-  base64 basename cat chgrp chmod chown chroot cksum comm cp csplit cut
-  date dd df dir dircolors dirname du echo env expand expr factor false
-  fmt fold groups head hostid id install join kill link ln logname ls
-  md5sum mkdir mkfifo mknod mv nice nl nohup od paste pathchk pinky pr
-  printenv printf ptx pwd readlink rm rmdir seq sha1sum sha224sum
-  sha256sum sha384sum sha512sum shred shuf sleep sort split stat stty
-  su sum sync tac tail tee test touch tr true tsort tty uname unexpand
-  uniq unlink users vdir wc who whoami yes
+  base64 basename cat chcon chgrp chmod chown chroot cksum comm cp csplit
+  cut date dd df dir dircolors dirname du echo env expand expr factor
+  false fmt fold groups head hostid id install join kill link ln logname
+  ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup od paste pathchk
+  pinky pr printenv printf ptx pwd readlink rm rmdir runcon seq sha1sum
+  sha224sum sha256sum sha384sum sha512sum shred shuf sleep sort split
+  stat stty su sum sync tac tail tee test touch tr true tsort tty uname
+  unexpand uniq unlink users vdir wc who whoami yes
 
 %package doc
 Summary: Coreutils documentation in info format
