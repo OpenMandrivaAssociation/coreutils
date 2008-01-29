@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 6.10
-Release: %mkrel 2
+Release: %mkrel 3
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -86,7 +86,7 @@ The following tools are included:
 Summary: Coreutils documentation in info format
 Group: Books/Computer books
 Requires: coreutils >= 4.5.4-2mdk
-Requires(pre): info-install
+Requires(post,preun): info-install
 
 %description doc
 This package contains coreutils documentation in GNU info format.
