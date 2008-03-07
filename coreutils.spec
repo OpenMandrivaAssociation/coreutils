@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 6.10
-Release: %mkrel 3
+Release: %mkrel 4
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -37,6 +37,9 @@ Patch801: coreutils-5.2.1-ptbrfix.patch
 Patch904: coreutils-5.0.91-allow_old_options.patch
 Patch909: coreutils-5.1.0-64bit-fixes.patch
 Patch910: coreutils-6.10-uname.patch
+
+# https://qa.mandriva.com/show_bug.cgi?id=38577
+Patch911: coreutils-6.10-groupfix.patch
 
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
 #Patch1010: coreutils-6.9-lzma-ls-coloring.patch
@@ -115,6 +118,7 @@ This package contains coreutils documentation in GNU info format.
 #%patch904 -p1 -b .old-options
 %patch909 -p1 -b .64bit
 %patch910 -p1 -b .cpu
+%patch911 -p1 -b .groups
 
 #%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
