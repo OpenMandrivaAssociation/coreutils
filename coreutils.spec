@@ -50,7 +50,7 @@ Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
 BuildRequires:  texinfo >= 4.3
-BuildRequires:	automake == 1.10
+BuildRequires:	automake
 BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
 
