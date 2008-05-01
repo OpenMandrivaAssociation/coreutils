@@ -23,14 +23,14 @@ Patch704: sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706: coreutils-6.10-pam.patch
+Patch706: coreutils-6.11-pam.patch
 Patch711: sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-6.10-new-i18n.patch
+Patch800: coreutils-6.11-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -109,10 +109,10 @@ This package contains coreutils documentation in GNU info format.
 # sh-utils
 %patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
-#%patch706 -p1 -b .pam
+%patch706 -p1 -b .pam
 
 # li18nux/lsb
-#%patch800 -p1 -b .i18n
+%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
