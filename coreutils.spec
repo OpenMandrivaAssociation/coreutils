@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 6.10
-Release: %mkrel 4
+Version: 6.11
+Release: %mkrel 1
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -107,18 +107,18 @@ This package contains coreutils documentation in GNU info format.
 %patch500 -p1
 
 # sh-utils
-%patch703 -p1 -b .dateman
+#%patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
-%patch706 -p1 -b .pam
+#%patch706 -p1 -b .pam
 
 # li18nux/lsb
-%patch800 -p1 -b .i18n
+#%patch800 -p1 -b .i18n
 %patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
 %patch909 -p1 -b .64bit
 %patch910 -p1 -b .cpu
-%patch911 -p1 -b .groups
+#%patch911 -p1 -b .groups
 
 #%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
