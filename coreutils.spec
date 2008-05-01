@@ -39,7 +39,7 @@ Patch909: coreutils-5.1.0-64bit-fixes.patch
 Patch910: coreutils-6.10-uname.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
-Patch911: coreutils-6.10-groupfix.patch
+Patch911: coreutils-6.11-groupfix.patch
 
 #(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
 #Patch1010: coreutils-6.9-lzma-ls-coloring.patch
@@ -118,7 +118,7 @@ This package contains coreutils documentation in GNU info format.
 #%patch904 -p1 -b .old-options
 %patch909 -p1 -b .64bit
 %patch910 -p1 -b .cpu
-#%patch911 -p1 -b .groups
+%patch911 -p1 -b .groups
 
 #%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
