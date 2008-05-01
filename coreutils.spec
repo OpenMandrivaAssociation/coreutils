@@ -18,7 +18,7 @@ Patch152: coreutils-4.5.7-touch_errno.patch
 Patch500: textutils-2.0.17-mem.patch
 
 # sh-utils
-Patch703: coreutils-5.93-dateman.patch
+Patch703: coreutils-6.11-dateman.patch
 Patch704: sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
@@ -107,7 +107,7 @@ This package contains coreutils documentation in GNU info format.
 %patch500 -p1
 
 # sh-utils
-#%patch703 -p1 -b .dateman
+%patch703 -p1 -b .dateman
 %patch704 -p1 -b .paths
 #%patch706 -p1 -b .pam
 
