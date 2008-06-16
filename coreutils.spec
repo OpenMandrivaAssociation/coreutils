@@ -125,6 +125,8 @@ This package contains coreutils documentation in GNU info format.
 %patch1013 -p1 -b .broken_blink
 
 cp %SOURCE201 man/help2man
+chmod a+x tests/misc/sort-mb-tests
+chmod a+x tests/misc/id-context
 chmod +x man/help2man
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
@@ -141,7 +143,6 @@ CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enab
 perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
 
 %check
-chmod a+x tests/sort/sort-mb-tests
 # Run the test suite:
 %make check
 
