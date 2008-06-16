@@ -1,6 +1,6 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 6.11
+Version: 6.12
 Release: %mkrel 1
 License: GPLv3+
 Group:   System/Base
@@ -30,7 +30,7 @@ Patch711: sh-utils-2.0.12-hname.patch
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-6.11-new-i18n.patch
+Patch800: coreutils-6.12-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -113,7 +113,7 @@ This package contains coreutils documentation in GNU info format.
 
 # li18nux/lsb
 %patch800 -p1 -b .i18n
-%patch801 -p0 -b .ptbr
+#%patch801 -p0 -b .ptbr
 
 #%patch904 -p1 -b .old-options
 %patch909 -p1 -b .64bit
