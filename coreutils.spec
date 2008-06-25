@@ -75,17 +75,6 @@ Most of these programs have significant advantages over their Unix
 counterparts, such as greater speed, additional options, and fewer
 arbitrary limits.
 
-The following tools are included:
-
-  base64 basename cat chcon chgrp chmod chown chroot cksum comm cp csplit
-  cut date dd df dir dircolors dirname du echo env expand expr factor
-  false fmt fold groups head hostid id install join kill link ln logname
-  ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup od paste pathchk
-  pinky pr printenv printf ptx pwd readlink rm rmdir runcon seq sha1sum
-  sha224sum sha256sum sha384sum sha512sum shred shuf sleep sort split
-  stat stty su sum sync tac tail tee test touch tr true tsort tty uname
-  unexpand uniq unlink users vdir wc who whoami yes
-
 %package doc
 Summary: Coreutils documentation in info format
 Group: Books/Computer books
