@@ -42,9 +42,7 @@ Patch910: coreutils-6.10-uname.patch
 Patch911: coreutils-6.11-groupfix.patch
 Patch912: coreutils-6.10-configuration.patch
 
-#(peroyvind): adds coloring for lzma compressed files just like for .gz etc.
-#Patch1010: coreutils-6.9-lzma-ls-coloring.patch
-Patch1011: coreutils-6.9-DIR_COLORS-mdkconf.patch
+Patch1011: coreutils-6.12-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 
@@ -111,7 +109,6 @@ This package contains coreutils documentation in GNU info format.
 %patch911 -p1 -b .groups
 %patch912 -p1 -b .cut
 
-#%patch1010 -p1 -b .lzma_colors
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
 
