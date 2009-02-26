@@ -52,7 +52,10 @@ Patch1014: coreutils-7.1-am_init_check.patch
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
 BuildRequires:  texinfo >= 4.3
-BuildRequires:	automake
+# We need automake which supports the dist-xz target
+BuildRequires:	automake >= 1.10.2-2 
+# And tar which supports xz automagically since rpm.org seems to rely on this(..?)
+BuildRequires:	tar >= 1.21-2
 BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
 
