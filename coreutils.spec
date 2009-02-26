@@ -1,18 +1,18 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 6.12
-Release: %mkrel 5
+Version: 7.1
+Release: %mkrel 1
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
-Source0: http://ftp.gnu.org/gnu/%name/%name-%version.tar.lzma
+Source0: http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source200:  su.pamd
 Source201:  help2man
 
 # fileutils
-Patch101: coreutils-5.93-spacedir.patch
-Patch1155: coreutils-6.9-force-option--override--interactive-option.patch
+Patch101: coreutils-7.1-spacedir.patch
+Patch1155: coreutils-7.1-force-option--override--interactive-option.patch
 Patch118: fileutils-4.1-ls_h.patch
 Patch152: coreutils-4.5.7-touch_errno.patch
 Patch500: textutils-2.0.17-mem.patch
@@ -23,14 +23,14 @@ Patch704: sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706: coreutils-6.11-pam.patch
+Patch706: coreutils-7.1-pam.patch
 Patch711: sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-6.12-new-i18n.patch
+Patch800: coreutils-7.1-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -42,9 +42,12 @@ Patch910: coreutils-6.10-uname.patch
 Patch911: coreutils-6.11-groupfix.patch
 Patch912: coreutils-6.10-configuration.patch
 
-Patch1011: coreutils-6.12-DIR_COLORS-mdkconf.patch
+Patch1011: coreutils-7.1-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
+#(peroyvind): change dependency on automake to current since dist-xz support
+#             has been backported..
+Patch1014: coreutils-7.1-am_init_check.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
@@ -87,7 +90,7 @@ This package contains coreutils documentation in GNU info format.
 
 # fileutils
 %patch101 -p1 -b .space
-%patch1155 -p0 -b .override
+%patch1155 -p1 -b .override
 %patch118 -p1
 %patch152 -p1
 
@@ -111,6 +114,8 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
+
+%patch1014 -p1 -b .am_check~
 
 cp %SOURCE201 man/help2man
 chmod a+x tests/misc/sort-mb-tests
