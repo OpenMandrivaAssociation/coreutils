@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 7.1
-Release: %mkrel 1
+Release: %mkrel 2
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -60,6 +60,8 @@ BuildRequires:	libacl-devel libattr-devel
 Requires:   pam >= 0.66-12
 
 Provides:	fileutils = %version, sh-utils = %version, stat, textutils = %version
+Provides:	%{_bindir}/env
+Provides:	/bin/env
 Obsoletes:	fileutils sh-utils stat textutils
 
 Conflicts:  tetex < 1.0.7-49mdk
