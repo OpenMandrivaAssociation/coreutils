@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 7.1
-Release: %mkrel 2
+Version: 7.2
+Release: %mkrel 1
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -23,14 +23,14 @@ Patch704: sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706: coreutils-7.1-pam.patch
+Patch706: coreutils-7.2-pam.patch
 Patch711: sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-7.1-new-i18n.patch
+Patch800: coreutils-7.2-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -40,7 +40,6 @@ Patch910: coreutils-6.10-uname.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911: coreutils-6.11-groupfix.patch
-Patch912: coreutils-6.10-configuration.patch
 
 Patch1011: coreutils-7.1-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
@@ -115,7 +114,6 @@ This package contains coreutils documentation in GNU info format.
 %patch909 -p1 -b .64bit
 %patch910 -p1 -b .cpu
 %patch911 -p1 -b .groups
-%patch912 -p1 -b .cut
 
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
