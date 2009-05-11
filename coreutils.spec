@@ -1,6 +1,6 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 7.2
+Version: 7.4
 Release: %mkrel 1
 License: GPLv3+
 Group:   System/Base
@@ -46,7 +46,7 @@ Patch1011: coreutils-7.1-DIR_COLORS-mdkconf.patch
 Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
 #(peroyvind): change dependency on automake to current since dist-xz support
 #             has been backported..
-Patch1014: coreutils-7.1-am_init_check.patch
+Patch1014: coreutils-7.4-am_init_check.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
