@@ -44,9 +44,6 @@ Patch911: coreutils-6.11-groupfix.patch
 Patch1011: coreutils-7.1-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
-#(peroyvind): change dependency on automake to current since dist-xz support
-#             has been backported..
-Patch1014: coreutils-7.4-am_init_check.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
@@ -117,8 +114,6 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
-
-%patch1014 -p1 -b .am_check~
 
 cp %SOURCE201 man/help2man
 chmod a+x tests/misc/sort-mb-tests
