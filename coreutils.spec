@@ -1,7 +1,7 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
 Version: 7.4
-Release: %mkrel 1
+Release: %mkrel 2
 License: GPLv3+
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
@@ -129,10 +129,6 @@ automake --gnits --add-missing
 autoconf
 CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam
 %make HELP2MAN=$PWD/man/help2man
-
-# Xen kernel is too old and doesn't have utimensat()/futimens(), so prevent
-# it from being explicitly selected by coreutils while we support Xen (#45606)
-sed -i.utimensat -e '/#define \(HAVE_FUTIMENS\|HAVE_UTIMENSAT\) 1/s,\(.*\),/* #undef for Xen (#45606) ... \1 */,' lib/config.h
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
 perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
