@@ -127,7 +127,7 @@ export DEFAULT_POSIX2_VERSION=199209
 aclocal -I m4
 automake --gnits --add-missing
 autoconf
-CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam --enable-install-program=su
 %make HELP2MAN=$PWD/man/help2man
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
