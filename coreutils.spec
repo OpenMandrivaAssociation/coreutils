@@ -54,6 +54,11 @@ BuildRequires:	automake >= 1.10.2-2
 BuildRequires:	tar >= 1.21-2
 BuildRequires:	libacl-devel
 BuildRequires:	libattr-devel
+BuildRequires:	libgmp-devel
+BuildRequires:	libcap-devel
+BuildRequires:	bison
+BuildRequires:	flex
+BuildRequires:	strace
 Requires:	pam >= 0.66-12
 Provides:	fileutils = %{version}
 Provides:	sh-utils = %{version}
