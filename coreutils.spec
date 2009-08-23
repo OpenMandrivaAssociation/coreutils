@@ -1,8 +1,8 @@
 Summary: The GNU core utilities: a set of tools commonly used in shell scripts
 Name:    coreutils
-Version: 7.4
-Release: %mkrel 2
-License: GPLv3+
+Version: 7.5
+Release: %mkrel 1
+License: GPLv3
 Group:   System/Base
 Url:     http://www.gnu.org/software/coreutils/
 
@@ -30,7 +30,7 @@ Patch711: sh-utils-2.0.12-hname.patch
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800: coreutils-7.2-new-i18n.patch
+Patch800: coreutils-7.5-new-i18n.patch
 # small pt_BR fix
 Patch801: coreutils-5.2.1-ptbrfix.patch
 
@@ -43,7 +43,7 @@ Patch911: coreutils-6.11-groupfix.patch
 
 Patch1011: coreutils-7.1-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
-Patch1013: coreutils-6.9-always-blinking-colors-on-broken-symlinks.patch
+Patch1013: coreutils-7.5-always-blinking-colors-on-broken-symlinks.patch
 
 BuildRoot: %_tmppath/%{name}-root
 BuildRequires:	gettext termcap-devel pam-devel
@@ -127,7 +127,7 @@ export DEFAULT_POSIX2_VERSION=199209
 aclocal -I m4
 automake --gnits --add-missing
 autoconf
-CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam --enable-install-program=su
+CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE=1" %configure2_5x --enable-largefile --enable-pam --enable-install-program=su --disable-rpath
 %make HELP2MAN=$PWD/man/help2man
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
@@ -227,6 +227,7 @@ true
 /bin/*
 %_bindir/*
 %_sbindir/chroot
+%{_libdir}/coreutils/libstdbuf.so
 
 %files doc
 %defattr(-,root,root)
