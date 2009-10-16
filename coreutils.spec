@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	7.5
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -176,12 +176,13 @@ fi
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir},%{_sysconfdir}/pam.d}
-for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink
+for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
 	mv %{buildroot}/{%{_bindir},bin}/$f
 done
 
 ln -sf ../../bin/expr %{buildroot}%{_bindir}/
+ln -sf ../../bin/tac %{buildroot}%{_bindir}/
 
 # chroot was in /usr/sbin :
 mv %{buildroot}/{%{_bindir},%{_sbindir}}/chroot
