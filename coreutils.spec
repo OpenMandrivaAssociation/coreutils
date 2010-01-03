@@ -10,7 +10,7 @@ Source200:	su.pamd
 Source201:	help2man
 
 # fileutils
-Patch101:	coreutils-7.1-spacedir.patch
+Patch101:	coreutils-8.2-spacedir.patch
 Patch1155:	coreutils-8.2-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	textutils-2.0.17-mem.patch
