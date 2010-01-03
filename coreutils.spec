@@ -43,6 +43,7 @@ Patch911:	coreutils-6.11-groupfix.patch
 Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
+Patch1014:	coreutils-8.2-disable-tests.patch
 
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
@@ -124,6 +125,7 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
+%patch1014 -p1 -b .tests
 
 cp %SOURCE201 man/help2man
 chmod a+x tests/misc/sort-mb-tests
@@ -151,8 +153,9 @@ export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
 
 %check
+%define Werror_cflags %nil
 # Run the test suite:
-%make check
+%make check CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 
 %install
 [[ -f ChangeLog ]] && bzip2 -9f ChangeLog
