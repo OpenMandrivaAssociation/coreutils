@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	7.5
-Release:	%mkrel 2
+Version:	8.2
+Release:	%mkrel 1
 License:	GPLv3
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -11,9 +11,8 @@ Source201:	help2man
 
 # fileutils
 Patch101:	coreutils-7.1-spacedir.patch
-Patch1155:	coreutils-7.1-force-option--override--interactive-option.patch
+Patch1155:	coreutils-8.2-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
-Patch152:	coreutils-4.5.7-touch_errno.patch
 Patch500:	textutils-2.0.17-mem.patch
 
 # sh-utils
@@ -22,27 +21,28 @@ Patch704:	sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706:	coreutils-7.2-pam.patch
+Patch706:	coreutils-8.2-pam.patch
 Patch711:	sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
 # http://www.openi18n.org/subgroups/utildev/patch/
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
-Patch800:	coreutils-7.5-new-i18n.patch
+# fwang: we often get this patch from fedora
+Patch800:	coreutils-8.2-new-i18n.patch
 # small pt_BR fix
 Patch801:	coreutils-5.2.1-ptbrfix.patch
 
 Patch904:	coreutils-5.0.91-allow_old_options.patch
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
-Patch910:	coreutils-6.10-uname.patch
+Patch910:	coreutils-8.2-uname-processortype.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-6.11-groupfix.patch
 
-Patch1011:	coreutils-7.1-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
-Patch1013:	coreutils-7.5-always-blinking-colors-on-broken-symlinks.patch
+Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
 
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
@@ -104,7 +104,6 @@ This package contains coreutils documentation in GNU info format.
 %patch101 -p1 -b .space
 %patch1155 -p1 -b .override
 %patch118 -p1
-%patch152 -p1
 
 # textutils
 %patch500 -p1
