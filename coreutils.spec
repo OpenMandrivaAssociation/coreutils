@@ -13,7 +13,7 @@ Source201:	help2man
 Patch101:	coreutils-8.2-spacedir.patch
 Patch1155:	coreutils-8.2-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
-Patch500:	textutils-2.0.17-mem.patch
+Patch500:	coreutils-8.3-mem.patch
 
 # sh-utils
 Patch703:	coreutils-6.11-dateman.patch
@@ -38,7 +38,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 Patch910:	coreutils-8.2-uname-processortype.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
-Patch911:	coreutils-6.11-groupfix.patch
+Patch911:	coreutils-8.3-groupfix.patch
 
 Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
