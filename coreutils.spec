@@ -29,7 +29,7 @@ Patch711:	sh-utils-2.0.12-hname.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.2-new-i18n.patch
+Patch800:	coreutils-8.3-new-i18n.patch
 # small pt_BR fix
 Patch801:	coreutils-5.2.1-ptbrfix.patch
 
@@ -43,7 +43,6 @@ Patch911:	coreutils-8.3-groupfix.patch
 Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
-Patch1014:	coreutils-8.2-disable-tests.patch
 
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
@@ -125,7 +124,6 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1011 -p1 -b .colors_mdkconf
 %patch1013 -p1 -b .broken_blink
-%patch1014 -p1 -b .tests
 
 cp %SOURCE201 man/help2man
 chmod a+x tests/misc/sort-mb-tests
