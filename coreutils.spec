@@ -44,6 +44,10 @@ Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
 
+BuildRequires:	locales-fr
+BuildRequires:	locales-ja
+BuildRequires:	locales-zh
+BuildRequires:	locales-tr
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
 BuildRequires:	pam-devel
