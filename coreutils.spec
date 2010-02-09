@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
