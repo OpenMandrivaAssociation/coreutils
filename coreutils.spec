@@ -1,6 +1,6 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.6
+Version:	8.7
 Release:	%mkrel 1
 License:	GPLv3
 Group:		System/Base
@@ -21,7 +21,7 @@ Patch704:	sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706:	coreutils-8.6-pam.patch
+Patch706:	coreutils-8.7-pam.patch
 Patch711:	sh-utils-2.0.12-hname.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
@@ -29,7 +29,7 @@ Patch711:	sh-utils-2.0.12-hname.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.6-new-i18n.patch
+Patch800:	coreutils-8.7-new-i18n.patch
 # small pt_BR fix
 Patch801:	coreutils-5.2.1-ptbrfix.patch
 
