@@ -1,13 +1,14 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.7
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source200:	su.pamd
 Source201:	help2man
+Source202:	su-l.pamd
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
@@ -205,6 +206,7 @@ for i in hostname uptime ; do
 done
 
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
+install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 
 bzip2 -9f old/*/C* || :
 
@@ -247,6 +249,7 @@ true
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/D*
 %config(noreplace) %{_sysconfdir}/pam.d/su
+%config(noreplace) %{_sysconfdir}/pam.d/su-l
 %doc README
 /bin/*
 %{_bindir}/*
