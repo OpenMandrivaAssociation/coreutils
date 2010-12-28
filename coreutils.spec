@@ -208,13 +208,12 @@ do
 	mv %{buildroot}/{%{_bindir},bin}/$f
 done
 
-ln -sf ../../bin/expr %{buildroot}%{_bindir}/
-ln -sf ../../bin/tac %{buildroot}%{_bindir}/
-
 # chroot was in /usr/sbin :
 mv %{buildroot}/{%{_bindir},%{_sbindir}}/chroot
 # {cat,sort,cut} were previously moved from bin to /usr/bin and linked into 
-for i in env cut; do ln -sf ../../bin/$i %{buildroot}/usr/bin; done
+for f in cut env expr tac; do
+	ln -s /bin/$f %{buildroot}%{_bindir}/$f
+done
 
 install -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 
