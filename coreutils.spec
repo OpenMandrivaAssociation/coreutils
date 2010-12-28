@@ -158,9 +158,6 @@ export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 
 %make HELP2MAN=$PWD/man/help2man
 
-# XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
-perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreutils.texi
-
 %check
 %define Werror_cflags %nil
 # Run the test suite:
