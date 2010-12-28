@@ -65,16 +65,17 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	strace
 Requires:	pam >= 0.66-12
+
 Provides:	fileutils = %{version}
+Obsoletes:	fileutils < %{version}
 Provides:	sh-utils = %{version}
-Provides:	stat = %{version}
+Obsoletes:	sh-utils < %{version}
 Provides:	textutils = %{version}
+Obsoletes:	textutils  < %{version}
+
+Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
-Obsoletes:	fileutils < %{version}
-Obsoletes:	sh-utils < %{version}
-Obsoletes:	stat < %{version}
-Obsoletes:	textutils  < %{version}
 Obsoletes:	base64
 Conflicts:	tetex < 1.0.7-49mdk
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
