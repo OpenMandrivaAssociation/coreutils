@@ -66,12 +66,6 @@ BuildRequires:	flex
 BuildRequires:	strace
 Requires:	pam >= 0.66-12
 
-Provides:	fileutils = %{version}
-Obsoletes:	fileutils < %{version}
-Provides:	sh-utils = %{version}
-Obsoletes:	sh-utils < %{version}
-Provides:	textutils = %{version}
-Obsoletes:	textutils  < %{version}
 Provides:	mktemp = %{version}
 Obsoletes:	mktemp < %{version}
 
@@ -221,21 +215,11 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs 
 %clean
 rm -rf %{buildroot}
 
-%pre doc
-# We must desinstall theses info files since they're merged in
-# coreutils.info. else their postun'll be runned too last
-# and install-info'll faill badly because of doubles
-for file in sh-utils.info textutils.info fileutils.info; do
-	if [ -f /usr/share/info/$file.bz2 ]; then
-		/sbin/install-info /usr/share/info/$file.bz2 --dir=/usr/share/info/dir --remove &> /dev/null
-	fi
-done
-
 %preun doc
-%_remove_install_info %name.info
+%_remove_install_info %{name}.info
 
 %post doc
-%_install_info %name.info
+%_install_info %{name}.info
 # The next true is needed: else, if there's a problem, the 
 # package'll be installed 2 times because of trigger faillure
 true
