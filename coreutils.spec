@@ -184,7 +184,7 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--enable-largefile \
 	--enable-pam \
 	--enable-install-program=su \
-	--enable-no-install-program=arch,hostname,uptime \
+	--enable-no-install-program=arch,hostname,uptime,kill \
 	--without-selinux \
 	--disable-rpath \
 	--disable-silent-rules
@@ -223,9 +223,6 @@ install -m 4755 src/su %{buildroot}/bin
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
 install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 
-
-# fix conflict with util-linux:
-rm -f %{buildroot}%{_mandir}/man1/kill.1
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 #TV(cd %{buildroot}; find .%_datadir/locale/ -name coreutils.mo | fgrep LC_TIME | \
