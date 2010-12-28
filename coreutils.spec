@@ -201,14 +201,6 @@ rm -rf %{buildroot}
 # man pages are not installed with make install
 make mandir=%{buildroot}%{_mandir} install-man
 
-# fix japanese catalog file
-if [ -d %{buildroot}%{_datadir}/locale/ja_JP.EUC/LC_MESSAGES ]; then
-   mkdir -p %{buildroot}%{_datadir}/locale/ja/LC_MESSAGES
-   mv %{buildroot}%{_datadir}/locale/ja_JP.EUC/LC_MESSAGES/*mo \
-		%{buildroot}%{_datadir}/locale/ja/LC_MESSAGES
-   rm -rf %{buildroot}%{_datadir}/locale/ja_JP.EUC
-fi
-
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir},%{_sysconfdir}/pam.d}
 for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
