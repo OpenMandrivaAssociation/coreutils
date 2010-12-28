@@ -140,13 +140,14 @@ chmod a+x tests/misc/id-context
 chmod +x man/help2man
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
-bzip2 -9 ChangeLog
 
-%build
 export DEFAULT_POSIX2_VERSION=199209
 aclocal -I m4
 automake --gnits --add-missing
 autoconf
+bzip2 -9 ChangeLog
+
+%build
 export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 
 %configure2_5x \
