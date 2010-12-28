@@ -118,7 +118,7 @@ Summary:	Coreutils documentation in info format
 Group:		Books/Computer books
 Requires:	coreutils >= 4.5.4-2mdk
 Requires(post,preun):	info-install
-BuildArch: noarch
+BuildArch:	noarch
 
 %description	doc
 This package contains coreutils documentation in GNU info format.
