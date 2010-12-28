@@ -33,10 +33,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
 Patch800:	coreutils-8.8-new-i18n.patch
-# small pt_BR fix
-Patch801:	coreutils-5.2.1-ptbrfix.patch
 
-Patch904:	coreutils-5.0.91-allow_old_options.patch
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
@@ -145,9 +142,7 @@ This package contains coreutils documentation in GNU info format.
 
 # li18nux/lsb
 %patch800 -p1 -b .i18n~
-#%%patch801 -p0 -b .ptbr~
 
-#%%patch904 -p1 -b .old-options~
 %patch909 -p1 -b .64bit~
 %patch911 -p1 -b .groups~
 
