@@ -223,9 +223,6 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs 
 
 %find_lang %{name}
 
-# (sb) Deal with Installed (but unpackaged) file(s) found
-rm -f %{buildroot}%{_datadir}/info/dir
-
 %clean
 rm -rf %{buildroot}
 
