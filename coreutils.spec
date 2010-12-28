@@ -152,6 +152,7 @@ export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 	--enable-largefile \
 	--enable-pam \
 	--enable-install-program=su \
+	--without-selinux \
 	--disable-rpath
 
 %make HELP2MAN=$PWD/man/help2man
