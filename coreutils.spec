@@ -264,6 +264,7 @@ true
 /bin/*
 %{_bindir}/*
 %{_sbindir}/chroot
+%dir %{_libdir}/coreutils
 %{_libdir}/coreutils/libstdbuf.so
 
 %files doc
