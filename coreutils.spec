@@ -7,7 +7,6 @@ Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source200:	su.pamd
-Source201:	help2man
 Source202:	su-l.pamd
 
 # fileutils
@@ -165,10 +164,7 @@ This package contains coreutils documentation in GNU info format.
 %patch2912 -p1 -b .overflow~
 %patch2917 -p1 -b .pie~
 
-cp %SOURCE201 man/help2man
-chmod a+x tests/misc/sort-mb-tests
-chmod a+x tests/misc/id-context
-chmod +x man/help2man
+chmod a+x tests/misc/sort-mb-tests tests/misc/id-context
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
@@ -190,7 +186,7 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--disable-rpath \
 	--disable-silent-rules
 
-%make HELP2MAN=$PWD/man/help2man
+%make
 
 %check
 %define Werror_cflags %nil
@@ -198,9 +194,6 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 %make check CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 
 %install
-# for help2man:
-export PATH=$PATH:RPM_BUILD_ROOT/man
-
 rm -rf %{buildroot}
 %makeinstall_std
 
