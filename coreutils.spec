@@ -17,13 +17,16 @@ Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
 # sh-utils
+
+#add info about TZ envvar to date manpage
 Patch703:	coreutils-6.11-dateman.patch
+#set paths for su explicitly, don't get influenced by paths.h
 Patch704:	sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
 Patch706:	coreutils-8.7-pam.patch
-Patch711:	sh-utils-2.0.12-hname.patch
+Patch713:	coreutils-4.5.3-langinfo.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
 # http://www.openi18n.org/subgroups/utildev/patch/
@@ -36,7 +39,6 @@ Patch801:	coreutils-5.2.1-ptbrfix.patch
 
 Patch904:	coreutils-5.0.91-allow_old_options.patch
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
-Patch910:	coreutils-8.2-uname-processortype.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
@@ -44,6 +46,29 @@ Patch911:	coreutils-8.3-groupfix.patch
 Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
+
+# fedora patches
+#add note about no difference between binary/text mode on Linux - md5sum manpage
+Patch2101:	coreutils-6.10-manpages.patch
+#temporarily workaround probable kernel issue with TCSADRAIN(#504798)
+Patch2102:	coreutils-7.4-sttytcsadrain.patch
+#do display processor type for uname -p/-i based on uname(2) syscall
+Patch2103:	coreutils-8.2-uname-processortype.patch
+#df --direct
+Patch2104:	coreutils-df-direct.patch
+#Fix mkstemp on sparc64
+Patch2105:	coreutils-mkstemp.patch
+
+#Call setsid() in su under some circumstances (bug #173008).
+Patch2900:	coreutils-setsid.patch
+#make runuser binary based on su.c
+Patch2907:	coreutils-8.7-runuser.patch
+#getgrouplist() patch from Ulrich Drepper.
+Patch2908:	coreutils-getgrouplist.patch
+#Prevent buffer overflow in who(1) (bug #158405).
+Patch2912:	coreutils-overflow.patch
+#compile su with pie flag and RELRO protection
+Patch2917:	coreutils-8.4-su-pie.patch
 
 BuildRequires:	locales-fr
 BuildRequires:	locales-ja
@@ -104,29 +129,41 @@ This package contains coreutils documentation in GNU info format.
 %setup -q
 
 # fileutils
-%patch101 -p1 -b .space
-%patch1155 -p1 -b .override
+%patch101 -p1 -b .space~
+%patch1155 -p1 -b .override~
 %patch118 -p1
 
 # textutils
 %patch500 -p1
 
 # sh-utils
-%patch703 -p1 -b .dateman
-%patch704 -p1 -b .paths
-%patch706 -p1 -b .pam
+%patch703 -p1 -b .dateman~
+%patch704 -p1 -b .paths~
+%patch706 -p1 -b .pam~
+%patch713 -p1 -b .langinfo~
 
 # li18nux/lsb
-%patch800 -p1 -b .i18n
-#%patch801 -p0 -b .ptbr
+%patch800 -p1 -b .i18n~
+#%%patch801 -p0 -b .ptbr~
 
-#%patch904 -p1 -b .old-options
-%patch909 -p1 -b .64bit
-%patch910 -p1 -b .cpu
-%patch911 -p1 -b .groups
+#%%patch904 -p1 -b .old-options~
+%patch909 -p1 -b .64bit~
+%patch911 -p1 -b .groups~
 
-%patch1011 -p1 -b .colors_mdkconf
-%patch1013 -p1 -b .broken_blink
+%patch1011 -p1 -b .colors_mdkconf~
+%patch1013 -p1 -b .broken_blink~
+
+%patch2101 -p1 -b .manpages~
+%patch2102 -p1 -b .tcsadrain~
+%patch2103 -p1 -b .sysinfo~
+%patch2104 -p1 -b .dfdirect~
+%patch2105 -p1 -b .sparc~
+
+%patch2900 -p1 -b .setsid~
+%patch2907 -p1 -b .runuser~
+%patch2908 -p1 -b .getgrouplist~
+%patch2912 -p1 -b .overflow~
+%patch2917 -p1 -b .pie~
 
 cp %SOURCE201 man/help2man
 chmod a+x tests/misc/sort-mb-tests
@@ -142,7 +179,7 @@ autoconf
 bzip2 -9 ChangeLog
 
 %build
-export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
+export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 
 %configure2_5x \
 	--enable-largefile \
