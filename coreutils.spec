@@ -45,6 +45,8 @@ Patch911:	coreutils-8.3-groupfix.patch
 Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
+#(peroyvind): fix a test that fails to compile with -Werror=format-security
+Patch1014:	coreutils-8.8-check-string-format.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
@@ -151,6 +153,7 @@ This package contains coreutils documentation in GNU info format.
 
 %patch1011 -p1 -b .colors_mdkconf~
 %patch1013 -p1 -b .broken_blink~
+%patch1014 -p1 -b .str_fmt~
 
 %patch2101 -p1 -b .manpages~
 %patch2102 -p1 -b .tcsadrain~
@@ -189,9 +192,7 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 %make
 
 %check
-%define Werror_cflags %nil
-# Run the test suite:
-%make check CFLAGS="%{optflags} -D_GNU_SOURCE=1"
+%make check
 
 %install
 rm -rf %{buildroot}
