@@ -154,6 +154,7 @@ export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 	--enable-largefile \
 	--enable-pam \
 	--enable-install-program=su \
+	--enable-no-install-program=arch,hostname,uptime \
 	--without-selinux \
 	--disable-rpath
 
@@ -201,11 +202,6 @@ install -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 
 # su
 install -m 4755 src/su %{buildroot}/bin
-
-# These come from util-linux and/or procps.
-for i in hostname uptime ; do
-	rm -f %{buildroot}{%{_bindir}/$i,%{_mandir}/man1/${i}.1}
-done
 
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
 install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
