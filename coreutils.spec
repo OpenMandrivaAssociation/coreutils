@@ -156,7 +156,8 @@ export CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 	--enable-install-program=su \
 	--enable-no-install-program=arch,hostname,uptime \
 	--without-selinux \
-	--disable-rpath
+	--disable-rpath \
+	--disable-silent-rules
 
 %make HELP2MAN=$PWD/man/help2man
 
