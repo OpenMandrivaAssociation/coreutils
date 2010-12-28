@@ -140,6 +140,7 @@ chmod a+x tests/misc/id-context
 chmod +x man/help2man
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
+bzip2 -9 ChangeLog
 
 %build
 export DEFAULT_POSIX2_VERSION=199209
@@ -166,7 +167,6 @@ perl -pi -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' doc/coreut
 %make check CFLAGS="%{optflags} -D_GNU_SOURCE=1"
 
 %install
-[[ -f ChangeLog ]] && bzip2 -9f ChangeLog
 # for help2man:
 export PATH=$PATH:RPM_BUILD_ROOT/man
 
@@ -212,7 +212,6 @@ done
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
 install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 
-bzip2 -9f old/*/C* || :
 
 # fix conflict with util-linux:
 rm -f %{buildroot}%{_mandir}/man1/kill.1
@@ -262,6 +261,6 @@ true
 
 %files doc
 %defattr(-,root,root)
-%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO old/*
+%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
