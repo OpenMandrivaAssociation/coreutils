@@ -1,6 +1,6 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.8
+Version:	8.9
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		System/Base
@@ -32,7 +32,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.8-new-i18n.patch
+Patch800:	coreutils-8.9-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
@@ -47,13 +47,13 @@ Patch1014:	coreutils-8.8-check-string-format.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
-Patch2101:	coreutils-6.10-manpages.patch
+Patch2101:	coreutils-8.9-manpages.patch
 #temporarily workaround probable kernel issue with TCSADRAIN(#504798)
 Patch2102:	coreutils-7.4-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-df-direct.patch
+Patch2104:	coreutils-8.9-df-direct.patch
 #Fix mkstemp on sparc64
 Patch2105:	coreutils-mkstemp.patch
 
