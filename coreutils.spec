@@ -218,12 +218,6 @@ install -m 4755 src/su %{buildroot}/bin
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
 install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 
-
-#TV# find_lang look for LC_MESSAGES, not LC_TIME:
-#TV(cd %{buildroot}; find .%_datadir/locale/ -name coreutils.mo | fgrep LC_TIME | \
-#TV	sed -e "s!^.*/share/locale/\([^/]*\)/!%lang(\1) %_datadir/locale/\1/!") >> %name.lang
-find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
-
 %find_lang %{name}
 
 %clean
