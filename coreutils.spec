@@ -87,7 +87,6 @@ BuildRequires:	libcap-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	strace
-Requires:	pam >= 0.66-12
 
 Provides:	mktemp = %{version}
 Obsoletes:	mktemp < %{version}
