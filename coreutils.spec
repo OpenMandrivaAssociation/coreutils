@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.9
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -218,6 +218,8 @@ install -m 4755 src/su %{buildroot}/bin
 install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
 install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 
+#TV# find_lang look for LC_MESSAGES, not LC_TIME:
+find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
 %find_lang %{name}
 
 %clean
