@@ -68,10 +68,6 @@ Patch2912:	coreutils-overflow.patch
 #compile su with pie flag and RELRO protection
 Patch2917:	coreutils-8.4-su-pie.patch
 
-BuildRequires:	locales-fr
-BuildRequires:	locales-ja
-BuildRequires:	locales-zh
-BuildRequires:	locales-tr
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
 BuildRequires:	pam-devel
