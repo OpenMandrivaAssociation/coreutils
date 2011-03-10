@@ -39,7 +39,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.2-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.9-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
