@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.9
-Release:	%mkrel 2
+Version:	8.10
+Release:	%mkrel 1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -32,7 +32,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.9-new-i18n.patch
+Patch800:	coreutils-8.10-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
