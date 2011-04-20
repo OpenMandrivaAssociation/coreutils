@@ -1,6 +1,6 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.10
+Version:	8.11
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		System/Base
@@ -122,7 +122,8 @@ This package contains coreutils documentation in GNU info format.
 %setup -q
 
 # fileutils
-%patch101 -p1 -b .space~
+# (tpg) seems to be fixed
+#%patch101 -p1 -b .space~
 %patch1155 -p1 -b .override~
 %patch118 -p1
 
@@ -148,7 +149,8 @@ This package contains coreutils documentation in GNU info format.
 %patch2101 -p1 -b .manpages~
 %patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
-%patch2104 -p1 -b .dfdirect~
+# (tpg) not needed for now
+#%patch2104 -p1 -b .dfdirect~
 %patch2105 -p1 -b .sparc~
 
 %patch2900 -p1 -b .setsid~
