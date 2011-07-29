@@ -151,7 +151,10 @@ This package contains coreutils documentation in GNU info format.
 %patch2103 -p1 -b .sysinfo~
 # (tpg) not needed for now
 #%patch2104 -p1 -b .dfdirect~
+
+%ifnarch %arm
 %patch2105 -p1 -b .sparc~
+%endif
 
 %patch2900 -p1 -b .setsid~
 %patch2907 -p1 -b .runuser~
