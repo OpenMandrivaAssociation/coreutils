@@ -1,11 +1,12 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.12
+Version:	8.14
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
+Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 Source200:	su.pamd
 Source202:	su-l.pamd
 
@@ -32,14 +33,14 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.10-new-i18n.patch
+Patch800:	coreutils-8.14-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.9-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.14-DIR_COLORS-mdkconf.patch
 #(peroyvind): add back always red blinking on broken symlinks
 Patch1013:	coreutils-8.2-always-blinking-colors-on-broken-symlinks.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
@@ -49,7 +50,7 @@ Patch1014:	coreutils-8.8-check-string-format.patch
 #add note about no difference between binary/text mode on Linux - md5sum manpage
 Patch2101:	coreutils-8.9-manpages.patch
 #temporarily workaround probable kernel issue with TCSADRAIN(#504798)
-Patch2102:	coreutils-7.4-sttytcsadrain.patch
+Patch2102:	coreutils-8.14-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
@@ -62,7 +63,7 @@ Patch2900:	coreutils-setsid.patch
 #make runuser binary based on su.c
 Patch2907:	coreutils-8.7-runuser.patch
 #getgrouplist() patch from Ulrich Drepper.
-Patch2908:	coreutils-getgrouplist.patch
+Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
 #compile su with pie flag and RELRO protection
