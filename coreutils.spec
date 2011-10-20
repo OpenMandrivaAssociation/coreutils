@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.14
-Release:	%mkrel 1
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -93,7 +93,6 @@ Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Obsoletes:	base64
 Conflicts:	tetex < 1.0.7-49mdk
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 This package is the union of the old GNU fileutils, sh-utils, and 
@@ -191,7 +190,6 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 %make check
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 # man pages are not installed with make install
@@ -223,9 +221,6 @@ install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
-
 %preun doc
 %_remove_install_info %{name}.info
 
@@ -236,7 +231,6 @@ rm -rf %{buildroot}
 true
 
 %files -f %{name}.lang
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/D*
 %config(noreplace) %{_sysconfdir}/pam.d/su
 %config(noreplace) %{_sysconfdir}/pam.d/su-l
@@ -248,7 +242,6 @@ true
 %{_libdir}/coreutils/libstdbuf.so
 
 %files doc
-%defattr(-,root,root)
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
