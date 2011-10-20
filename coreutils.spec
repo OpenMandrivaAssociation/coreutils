@@ -89,6 +89,7 @@ BuildRequires:	strace
 Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
+Provides:	%{_bindir}/tr
 Obsoletes:	base64
 Conflicts:	tetex < 1.0.7-49mdk
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
