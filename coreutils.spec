@@ -84,8 +84,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	strace
 
-Provides:	mktemp = %{version}
-Obsoletes:	mktemp < %{version}
+%rename		mktemp
 
 Provides:	stat = %{version}
 Provides:	%{_bindir}/env
