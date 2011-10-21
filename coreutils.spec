@@ -90,7 +90,6 @@ Provides:	%{_bindir}/env
 Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Obsoletes:	base64
-Conflicts:	tetex < 1.0.7-49mdk
 
 %description
 This package is the union of the old GNU fileutils, sh-utils, and 
