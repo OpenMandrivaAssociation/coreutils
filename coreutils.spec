@@ -1,7 +1,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.15
-Release:	2
+Version:	8.16
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -75,7 +75,7 @@ BuildRequires:	texinfo >= 4.3
 BuildRequires:	automake >= 1.10.2-2
 # And tar which supports xz automagically since rpm.org seems to rely on this(..?)
 BuildRequires:	tar >= 1.21-2
-BuildRequires:	libacl-devel
+BuildRequires:	acl-devel
 BuildRequires:	libattr-devel
 BuildRequires:	libgmp-devel
 BuildRequires:	libcap-devel
@@ -110,7 +110,6 @@ arbitrary limits.
 Summary:	Coreutils documentation in info format
 Group:		Books/Computer books
 Requires:	coreutils >= 4.5.4-2mdk
-Requires(post,preun):	info-install
 BuildArch:	noarch
 
 %description	doc
@@ -123,7 +122,7 @@ This package contains coreutils documentation in GNU info format.
 # (tpg) seems to be fixed
 #%patch101 -p1 -b .space~
 %patch1155 -p1 -b .override~
-%patch118 -p1
+%patch118 -p1 -b .lsh~
 
 # textutils
 %patch500 -p1
@@ -219,15 +218,6 @@ install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
 %find_lang %{name}
-
-%preun doc
-%_remove_install_info %{name}.info
-
-%post doc
-%_install_info %{name}.info
-# The next true is needed: else, if there's a problem, the 
-# package'll be installed 2 times because of trigger faillure
-true
 
 %files -f %{name}.lang
 %config(noreplace) %{_sysconfdir}/D*
