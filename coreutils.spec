@@ -77,7 +77,7 @@ BuildRequires:	automake >= 1.10.2-2
 BuildRequires:	tar >= 1.21-2
 BuildRequires:	acl-devel
 BuildRequires:	libattr-devel
-BuildRequires:	libgmp-devel
+BuildRequires:	gmp-devel
 BuildRequires:	libcap-devel
 BuildRequires:	bison
 BuildRequires:	flex
