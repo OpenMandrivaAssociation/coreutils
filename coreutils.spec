@@ -1,6 +1,6 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.17
+Version:	8.19
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -20,8 +20,6 @@ Patch500:	coreutils-8.3-mem.patch
 
 #add info about TZ envvar to date manpage
 Patch703:	coreutils-6.11-dateman.patch
-#set paths for su explicitly, don't get influenced by paths.h
-Patch704:	sh-utils-1.16-paths.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
@@ -33,7 +31,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.17-new-i18n.patch
+Patch800:	coreutils-8.19-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
@@ -48,7 +46,7 @@ Patch1014:	coreutils-8.8-check-string-format.patch
 #add note about no difference between binary/text mode on Linux - md5sum manpage
 Patch2101:	coreutils-8.9-manpages.patch
 #temporarily workaround probable kernel issue with TCSADRAIN(#504798)
-Patch2102:	coreutils-8.14-sttytcsadrain.patch
+Patch2102:	coreutils-8.19-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
@@ -56,16 +54,10 @@ Patch2104:	coreutils-8.9-df-direct.patch
 #Fix mkstemp on sparc64
 Patch2105:	coreutils-mkstemp.patch
 
-#Call setsid() in su under some circumstances (bug #173008).
-Patch2900:	coreutils-setsid.patch
-#make runuser binary based on su.c
-Patch2907:	coreutils-8.7-runuser.patch
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
-#compile su with pie flag and RELRO protection
-Patch2917:	coreutils-8.4-su-pie.patch
 
 BuildRequires:	gettext
 BuildRequires:	termcap-devel
@@ -129,8 +121,6 @@ This package contains coreutils documentation in GNU info format.
 
 # sh-utils
 %patch703 -p1 -b .dateman~
-%patch704 -p1 -b .paths~
-%patch706 -p1 -b .pam~
 %patch713 -p1 -b .langinfo~
 
 # li18nux/lsb
@@ -152,11 +142,8 @@ This package contains coreutils documentation in GNU info format.
 %patch2105 -p1 -b .sparc~
 %endif
 
-%patch2900 -p1 -b .setsid~
-%patch2907 -p1 -b .runuser~
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
-%patch2917 -p1 -b .pie~
 
 chmod a+x tests/misc/sort-mb-tests tests/misc/id-context
 chmod +w ./src/dircolors.h
@@ -174,7 +161,6 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 %configure2_5x \
 	--enable-largefile \
 	--enable-pam \
-	--enable-install-program=su \
 	--enable-no-install-program=arch,hostname,uptime,kill \
 	--without-selinux \
 	--disable-rpath \
@@ -209,20 +195,12 @@ done
 
 install -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 
-# su
-install -m 4755 src/su %{buildroot}/bin
-
-install -m 644 %{SOURCE200} %{buildroot}%{_sysconfdir}/pam.d/su
-install -m 644 %{SOURCE202} %{buildroot}%{_sysconfdir}/pam.d/su-l
-
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
 %find_lang %{name}
 
 %files -f %{name}.lang
 %config(noreplace) %{_sysconfdir}/D*
-%config(noreplace) %{_sysconfdir}/pam.d/su
-%config(noreplace) %{_sysconfdir}/pam.d/su-l
 %doc README
 /bin/*
 %{_bindir}/*
