@@ -1,14 +1,12 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.19
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
-Source200:	su.pamd
-Source202:	su-l.pamd
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
