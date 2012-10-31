@@ -162,7 +162,7 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--without-selinux \
 	--disable-rpath \
 	--with-packager="%{packager}" \
-	--with-packager-version="%{___NVRA}" \
+	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-tty-group
 
