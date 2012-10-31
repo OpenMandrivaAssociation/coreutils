@@ -10,6 +10,7 @@ Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
+Source5:	coreutils-256color.sh
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
@@ -194,8 +195,10 @@ done
 
 install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 install -p -m644 %{SOURCE2} -D %{buildroot}%{_sysconfdir}/DIR_COLORS.256color
-install -p -m644 %{SOURCE3} -D %{buildroot}%{_sysconfdir}/profile.d/colorls.sh
-install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/colorls.csh
+install -p -m644 %{SOURCE3} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.sh
+install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.csh
+# XXX: should have csh profile.d script too...
+install -p -m644 %{SOURCE5} -D %{buildroot}%{_sysconfdir}/profile.d/10_256color.sh
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
@@ -205,8 +208,9 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 %doc README
 %config(noreplace) %{_sysconfdir}/DIR_COLORS
 %config(noreplace) %{_sysconfdir}/DIR_COLORS.256color
-%{_sysconfdir}/profile.d/colorls.sh
-%{_sysconfdir}/profile.d/colorls.csh
+%{_sysconfdir}/profile.d/10_256color.sh
+%{_sysconfdir}/profile.d/90_colorls.sh
+%{_sysconfdir}/profile.d/90_colorls.csh
 /bin/*
 %{_bindir}/*
 %{_sbindir}/chroot
