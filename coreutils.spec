@@ -161,7 +161,6 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--enable-no-install-program=arch,hostname,uptime,kill \
 	--without-selinux \
 	--disable-rpath \
-	--disable-silent-rules \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{___NVRA}" \
 	--with-packager-bug-reports="%{bugurl}" \
