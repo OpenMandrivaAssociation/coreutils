@@ -36,7 +36,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.14-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.20-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
 Patch1014:	coreutils-8.8-check-string-format.patch
 
@@ -162,7 +162,10 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--enable-no-install-program=arch,hostname,uptime,kill \
 	--without-selinux \
 	--disable-rpath \
-	--disable-silent-rules
+	--disable-silent-rules \
+	--with-packager="%{packager}" \
+	--with-packager-version="%{___NVRA}" \
+	--with-packager-bug-reports="%{bugurl}"
 
 %make
 
