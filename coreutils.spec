@@ -138,7 +138,7 @@ This package contains coreutils documentation in GNU info format.
 # (tpg) not needed for now
 #%patch2104 -p1 -b .dfdirect~
 
-%ifnarch %arm
+%ifnarch %{arm}
 %patch2105 -p1 -b .sparc~
 %endif
 
@@ -156,8 +156,6 @@ autoconf
 bzip2 -9 ChangeLog
 
 %build
-export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
-
 %configure2_5x \
 	--enable-largefile \
 	--enable-pam \
@@ -186,7 +184,7 @@ make mandir=%{buildroot}%{_mandir} install-man
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir},%{_sysconfdir}/pam.d}
 for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-	mv %{buildroot}/{%{_bindir},bin}/$f
+	mv %{buildroot}{%{_bindir},/bin}/$f
 done
 
 # chroot was in /usr/sbin :
@@ -202,7 +200,7 @@ install -p -m644 %{SOURCE3} -D %{buildroot}%{_sysconfdir}/profile.d/colorls.sh
 install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/colorls.csh
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
-find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | fgrep LC_TIME | xargs rm -f
+find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
 %find_lang %{name}
 
 %files -f %{name}.lang
