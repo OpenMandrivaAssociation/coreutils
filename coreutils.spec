@@ -29,7 +29,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.19-new-i18n.patch
+Patch800:	coreutils-8.20-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
@@ -143,7 +143,7 @@ This package contains coreutils documentation in GNU info format.
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
 
-chmod a+x tests/misc/sort-mb-tests tests/misc/id-context
+chmod a+x tests/misc/sort-mb-tests tests/misc/id-context.sh
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
