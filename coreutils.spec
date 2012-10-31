@@ -164,7 +164,8 @@ export CFLAGS="%{optflags} -fPIC -D_GNU_SOURCE=1"
 	--disable-silent-rules \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{___NVRA}" \
-	--with-packager-bug-reports="%{bugurl}"
+	--with-packager-bug-reports="%{bugurl}" \
+	--with-tty-group
 
 %make
 
