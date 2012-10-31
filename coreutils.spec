@@ -58,7 +58,6 @@ Patch2908:	coreutils-8.14-getgrouplist.patch
 Patch2912:	coreutils-overflow.patch
 
 BuildRequires:	gettext
-BuildRequires:	termcap-devel
 BuildRequires:	pam-devel
 BuildRequires:	texinfo >= 4.3
 # We need automake which supports the dist-xz target
