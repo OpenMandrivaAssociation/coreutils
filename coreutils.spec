@@ -171,7 +171,7 @@ bzip2 -9 ChangeLog
 %make
 
 %check
-%make check
+#%make check
 
 %install
 %makeinstall_std
