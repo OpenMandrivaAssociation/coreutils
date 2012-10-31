@@ -10,7 +10,7 @@ Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
-Patch1155:	coreutils-8.2-force-option--override--interactive-option.patch
+Patch1155:	coreutils-8.20-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
