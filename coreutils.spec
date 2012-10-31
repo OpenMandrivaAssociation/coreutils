@@ -66,9 +66,9 @@ BuildRequires:	automake >= 1.10.2-2
 # And tar which supports xz automagically since rpm.org seems to rely on this(..?)
 BuildRequires:	tar >= 1.21-2
 BuildRequires:	acl-devel
-BuildRequires:	libattr-devel
+BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
-BuildRequires:	libcap-devel
+BuildRequires:	cap-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	strace
