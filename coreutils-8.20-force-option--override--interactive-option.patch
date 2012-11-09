@@ -1,0 +1,42 @@
+--- coreutils-8.20/src/cp.c.override~	2012-10-23 16:14:12.000000000 +0200
++++ coreutils-8.20/src/cp.c	2012-10-31 02:26:46.930833341 +0100
+@@ -989,6 +989,7 @@ main (int argc, char **argv)
+           break;
+ 
+         case 'f':
++	  x.interactive = I_ALWAYS_YES;
+           x.unlink_dest_after_failed_open = true;
+           break;
+ 
+--- coreutils-8.20/tests/cp/cp-i.sh.override~	2012-10-23 16:14:12.000000000 +0200
++++ coreutils-8.20/tests/cp/cp-i.sh	2012-10-31 02:28:21.954108100 +0100
+@@ -56,8 +56,8 @@ echo n | cp -vfn c d 2>/dev/null > out6
+ compare out6 out_empty || fail=1
+ 
+ # do not ask, prevent from overwrite
+-echo n | cp -vnf c d 2>/dev/null > out7 || fail=1
+-compare out7 out_empty || fail=1
++#echo n | cp -vnf c d 2>/dev/null > out7 || fail=1
++#compare out7 out_empty || fail=1
+ 
+ # options --backup and --no-clobber are mutually exclusive
+ cp -bn c d 2>/dev/null && fail=1
+--- coreutils-8.20/tests/mv/i-2.sh.override~	2012-10-23 16:14:12.000000000 +0200
++++ coreutils-8.20/tests/mv/i-2.sh	2012-10-31 02:28:21.955108113 +0100
+@@ -34,11 +34,12 @@ mv -fi c d < y >/dev/null 2>&1 || fail=1
+ # Before 4.0s, this would not prompt.
+ cp -if e f < y > out 2>&1 || fail=1
+ 
++#(peroyvind) this test is bogus, we don't want to be prompted when forcing
+ # Make sure out contains the prompt.
+-case "$(cat out)" in
+-  "cp: try to overwrite 'f', overriding mode 0000 (---------)?"*) ;;
+-  *) fail=1 ;;
+-esac
++#case "$(cat out)" in
++#  "cp: try to overwrite 'f', overriding mode 0000 (---------)?"*) ;;
++#  *) fail=1 ;;
++#esac
+ 
+ test -f e || fail=1
+ test -f f || fail=1
