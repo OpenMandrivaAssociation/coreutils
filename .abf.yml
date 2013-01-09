@@ -1,7 +1,7 @@
 sources:
-  "coreutils-256color.sh:"	ffcdbdc435d3e538ed2481a2afca1ee629e4e01e
-  "coreutils-8.20.tar.xz:"	b120f138758100060333c2ed207ee276dd318980
-  "coreutils-8.20.tar.xz.sig:"	d306bcad943a16b1832d40bb4509502a6e6ee676
-  "coreutils-colorls.csh:"	0fa65959b686d0d068eeef424c4e4a3d7ebde7e1
-  "coreutils-colorls.sh:"	75d65a2bcf8a65163c51f5b1688360000d39353a
-  "coreutils-DIR_COLORS.256color:"	c87e9195485d2293f6f434a3538ba177ebff59ee
+  coreutils-256color.sh: ffcdbdc435d3e538ed2481a2afca1ee629e4e01e
+  coreutils-8.20.tar.xz: b120f138758100060333c2ed207ee276dd318980
+  coreutils-8.20.tar.xz.sig: d306bcad943a16b1832d40bb4509502a6e6ee676
+  coreutils-colorls.csh: 0fa65959b686d0d068eeef424c4e4a3d7ebde7e1
+  coreutils-colorls.sh: 75d65a2bcf8a65163c51f5b1688360000d39353a
+  coreutils-DIR_COLORS.256color: c87e9195485d2293f6f434a3538ba177ebff59ee
