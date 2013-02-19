@@ -157,6 +157,7 @@ autoconf
 bzip2 -9 ChangeLog
 
 %build
+%global optflags %{optflags} -Os
 %configure2_5x \
 	--enable-largefile \
 	--enable-pam \
