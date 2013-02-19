@@ -59,7 +59,6 @@ Patch2908:	coreutils-8.14-getgrouplist.patch
 Patch2912:	coreutils-overflow.patch
 
 BuildRequires:	gettext
-BuildRequires:	pam-devel
 BuildRequires:	texinfo >= 4.3
 # We need automake which supports the dist-xz target
 BuildRequires:	automake >= 1.10.2-2
@@ -175,7 +174,7 @@ bzip2 -9 ChangeLog
 %makeinstall_std
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
-mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir},%{_sysconfdir}/pam.d}
+mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
 for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
 	mv %{buildroot}{%{_bindir},/bin}/$f
