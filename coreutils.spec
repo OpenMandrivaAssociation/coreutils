@@ -109,7 +109,7 @@ This package contains coreutils documentation in GNU info format.
 
 # fileutils
 # (tpg) seems to be fixed
-#%patch101 -p1 -b .space~
+#patch101 -p1 -b .space~
 %patch1155 -p1 -b .override~
 %patch118 -p1 -b .lsh~
 
