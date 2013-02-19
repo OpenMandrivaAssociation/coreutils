@@ -1,6 +1,6 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.20
+Version:	8.21
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -20,7 +20,7 @@ Patch500:	coreutils-8.3-mem.patch
 # sh-utils
 
 #add info about TZ envvar to date manpage
-Patch703:	coreutils-6.11-dateman.patch
+Patch703:	coreutils-8.21-dateman.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
@@ -32,7 +32,7 @@ Patch713:	coreutils-4.5.3-langinfo.patch
 # this one is actually a merger of 5.2 and 5.3, as join segfaults
 # compiled with gcc4 and the 5.1/5.2 patch
 # fwang: we often get this patch from fedora
-Patch800:	coreutils-8.20-new-i18n.patch
+Patch800:	coreutils-8.21-new-i18n.patch
 
 Patch909:	coreutils-5.1.0-64bit-fixes.patch
 
@@ -145,7 +145,8 @@ This package contains coreutils documentation in GNU info format.
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
 
-chmod a+x tests/misc/sort-mb-tests tests/misc/id-context.sh
+
+chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
