@@ -21,9 +21,6 @@ Patch500:	coreutils-8.3-mem.patch
 
 #add info about TZ envvar to date manpage
 Patch703:	coreutils-8.21-dateman.patch
-# RMS will never accept the PAM patch because it removes his historical
-# rant about Twenex and the wheel group, so we'll continue to maintain
-# it here indefinitely.
 Patch713:	coreutils-4.5.3-langinfo.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
