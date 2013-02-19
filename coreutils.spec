@@ -51,7 +51,7 @@ Patch2102:	coreutils-8.19-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-8.9-df-direct.patch
+Patch2104:	coreutils-8.21-df-direct.patch
 #Fix mkstemp on sparc64
 Patch2105:	coreutils-mkstemp.patch
 
@@ -136,7 +136,7 @@ This package contains coreutils documentation in GNU info format.
 %patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
 # (tpg) not needed for now
-#%patch2104 -p1 -b .dfdirect~
+%patch2104 -p1 -b .dfdirect~
 
 %ifnarch %{arm}
 %patch2105 -p1 -b .sparc~
