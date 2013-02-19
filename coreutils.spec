@@ -134,7 +134,6 @@ This package contains coreutils documentation in GNU info format.
 %patch2101 -p1 -b .manpages~
 %patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
-# (tpg) not needed for now
 %patch2104 -p1 -b .dfdirect~
 
 %ifnarch %{arm}
