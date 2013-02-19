@@ -24,7 +24,6 @@ Patch703:	coreutils-8.21-dateman.patch
 # RMS will never accept the PAM patch because it removes his historical
 # rant about Twenex and the wheel group, so we'll continue to maintain
 # it here indefinitely.
-Patch706:	coreutils-8.7-pam.patch
 Patch713:	coreutils-4.5.3-langinfo.patch
 
 # (sb) lin18nux/lsb compliance - normally from here:
@@ -185,7 +184,7 @@ do
 done
 
 # chroot was in /usr/sbin :
-mv %{buildroot}/{%{_bindir},%{_sbindir}}/chroot
+mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
 # {cat,sort,cut} were previously moved from bin to /usr/bin and linked into 
 for f in cut env expr tac; do
 	ln -s /bin/$f %{buildroot}%{_bindir}/$f
