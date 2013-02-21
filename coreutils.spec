@@ -58,6 +58,9 @@ Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
 
+# Fix build on AArch64
+Patch3000:	coreutils-8.21-no-incorrect-aarch64-asm.patch
+
 BuildRequires:	gettext
 BuildRequires:	texinfo >= 4.3
 # We need automake which supports the dist-xz target
@@ -141,6 +144,8 @@ This package contains coreutils documentation in GNU info format.
 
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
+
+%patch3000 -p1 -b .aarch64~
 
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
