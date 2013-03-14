@@ -61,22 +61,17 @@ Patch2912:	coreutils-overflow.patch
 # Fix build on AArch64
 Patch3000:	coreutils-8.21-no-incorrect-aarch64-asm.patch
 
+BuildRequires:	bison
+BuildRequires:	flex
 BuildRequires:	gettext
+BuildRequires:	strace
 BuildRequires:	texinfo >= 4.3
-# We need automake which supports the dist-xz target
-BuildRequires:	automake >= 1.10.2-2
-# And tar which supports xz automagically since rpm.org seems to rely on this(..?)
-BuildRequires:	tar >= 1.21-2
 BuildRequires:	acl-devel
 BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
-BuildRequires:	bison
-BuildRequires:	flex
-BuildRequires:	strace
 
 %rename		mktemp
-
 Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
@@ -101,7 +96,7 @@ arbitrary limits.
 %package	doc
 Summary:	Coreutils documentation in info format
 Group:		Books/Computer books
-Requires:	coreutils >= 4.5.4-2mdk
+Requires:	coreutils
 BuildArch:	noarch
 
 %description	doc
@@ -109,7 +104,6 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
-
 # fileutils
 # (tpg) seems to be fixed
 #patch101 -p1 -b .space~
@@ -217,3 +211,4 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
+
