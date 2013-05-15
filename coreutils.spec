@@ -1,3 +1,5 @@
+%bcond_with	crosscompile
+
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
@@ -60,6 +62,7 @@ Patch2912:	coreutils-overflow.patch
 
 # Fix build on AArch64
 Patch3000:	coreutils-8.21-no-incorrect-aarch64-asm.patch
+Patch3001:	dummy_help2man.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
@@ -140,7 +143,9 @@ This package contains coreutils documentation in GNU info format.
 %patch2912 -p1 -b .overflow~
 
 %patch3000 -p1 -b .aarch64~
-
+%if %{with crosscompile}
+%patch3001 -p1 -b .help2man
+%endif
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
 chmod +w ./src/dircolors.h
