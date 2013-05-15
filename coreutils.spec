@@ -147,7 +147,7 @@ chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
 export DEFAULT_POSIX2_VERSION=199209
-aclocal -I m4
+aclocal -I m4 --dont-fix
 automake --gnits --add-missing
 autoconf
 bzip2 -9 ChangeLog
