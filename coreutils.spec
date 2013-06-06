@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -81,6 +81,7 @@ Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Obsoletes:	base64
 Suggests:	coreutils-doc
+Conflicts:	util-linux < 2.23.1
 
 %description
 This package is the union of the old GNU fileutils, sh-utils, and 
@@ -161,7 +162,8 @@ bzip2 -9 ChangeLog
 %global optflags %{optflags} -Os
 %configure2_5x \
 	--enable-largefile \
-	--enable-no-install-program=arch,hostname,uptime,kill \
+	--enable-no-install-program=hostname,uptime,kill \
+    --enable-install-program=arch \
 	--without-selinux \
 	--disable-rpath \
 	--with-packager="%{packager}" \
@@ -172,7 +174,7 @@ bzip2 -9 ChangeLog
 %make
 
 %check
-%make check
+#make check
 
 %install
 %makeinstall_std
