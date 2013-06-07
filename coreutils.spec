@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -81,8 +81,7 @@ Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Obsoletes:	base64
 Suggests:	coreutils-doc
-# (tpg) remove this for now
-#Conflicts:	util-linux < 2.23.1
+Conflicts:	util-linux < 2.23.1-2
 
 %description
 This package is the union of the old GNU fileutils, sh-utils, and 
@@ -182,7 +181,7 @@ bzip2 -9 ChangeLog
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
-for f in basename cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
+for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
 	mv %{buildroot}{%{_bindir},/bin}/$f
 done
@@ -198,11 +197,6 @@ install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 install -p -m644 %{SOURCE2} -D %{buildroot}%{_sysconfdir}/DIR_COLORS.256color
 install -p -m644 %{SOURCE3} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.sh
 install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.csh
-
-# (tpg) remove this for now
-#mv %{buildroot}/bin/arch %{buildroot}%{_bindir}/arch
-
-rm -rf %{buildroot}/usr/share/man/man1/arch.1.*
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
