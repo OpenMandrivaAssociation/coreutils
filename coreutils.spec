@@ -202,6 +202,8 @@ install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.c
 # (tpg) remove this for now
 #mv %{buildroot}/bin/arch %{buildroot}%{_bindir}/arch
 
+rm -rf %{buildroot}/usr/share/man/man1/arch.1.*
+
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
 %find_lang %{name}
