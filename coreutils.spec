@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -81,7 +81,8 @@ Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Obsoletes:	base64
 Suggests:	coreutils-doc
-Conflicts:	util-linux < 2.23.1
+# (tpg) remove this for now
+#Conflicts:	util-linux < 2.23.1
 
 %description
 This package is the union of the old GNU fileutils, sh-utils, and 
@@ -197,6 +198,10 @@ install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
 install -p -m644 %{SOURCE2} -D %{buildroot}%{_sysconfdir}/DIR_COLORS.256color
 install -p -m644 %{SOURCE3} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.sh
 install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.csh
+
+# (tpg) remove this for now
+rm -rf /bin/arch
+rm -rf %{_bindir}/arch
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
