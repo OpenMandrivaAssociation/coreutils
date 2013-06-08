@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
-Release:	4
+Release:	5
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -102,6 +102,7 @@ Summary:	Coreutils documentation in info format
 Group:		Books/Computer books
 Requires:	coreutils
 BuildArch:	noarch
+Conflicts:	util-linux < 2.23.1-2
 
 %description	doc
 This package contains coreutils documentation in GNU info format.
