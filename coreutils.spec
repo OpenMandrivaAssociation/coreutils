@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.21
-Release:	7
+Release:	8
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -44,6 +44,9 @@ Patch1014:	coreutils-8.8-check-string-format.patch
 Patch1015:	coreutils-8.21-include-missing-headers.patch
 
 # fedora patches
+Patch2001:	coreutils-8.21-install-strip.patch
+Patch2002:	coreutils-aarch64-longlong.patch
+Patch2003:	coreutils-cp-nopreserve-invalidargs.patch
 #add note about no difference between binary/text mode on Linux - md5sum manpage
 Patch2101:	coreutils-8.9-manpages.patch
 #temporarily workaround probable kernel issue with TCSADRAIN(#504798)
@@ -52,16 +55,14 @@ Patch2102:	coreutils-8.19-sttytcsadrain.patch
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
 Patch2104:	coreutils-8.21-df-direct.patch
-#Fix mkstemp on sparc64
-Patch2105:	coreutils-mkstemp.patch
+#add note about mkdir --mode behaviour into info documentation(#610559)
+Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
 
-# Fix build on AArch64
-Patch3000:	coreutils-8.21-no-incorrect-aarch64-asm.patch
 Patch3001:	dummy_help2man.patch
 
 BuildRequires:	bison
@@ -132,19 +133,19 @@ This package contains coreutils documentation in GNU info format.
 %patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
 
+# From upstream
+%patch2001 -p1 -b .strip~
+%patch2002 -p1 -b .aarch64~
+%patch2003 -p1 -b .nopres~
 %patch2101 -p1 -b .manpages~
 %patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
 %patch2104 -p1 -b .dfdirect~
-
-%ifnarch %{arm}
-%patch2105 -p1 -b .sparc~
-%endif
+%patch2107 -p1 -b .mkdirmode~
 
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
 
-%patch3000 -p1 -b .aarch64~
 %if %{with crosscompile}
 %patch3001 -p1 -b .help2man
 %endif
