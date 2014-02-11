@@ -212,8 +212,8 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 /bin/*
 %{_bindir}/*
 %{_sbindir}/chroot
-%dir %{_libdir}/coreutils
-%{_libdir}/coreutils/libstdbuf.so
+%dir %{_libexecdir}/coreutils
+%{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
