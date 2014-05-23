@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.22
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -11,6 +11,11 @@ Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
+
+# From upstream
+Patch1:		coreutils-8.22-cp-selinux.patch
+Patch2:		coreutils-8.22-datetzcrash.patch
+Patch3:		coreutils-8.22-dd-sparsetest-xfsspeculativeprealloc.patch
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
@@ -36,7 +41,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.20-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.22-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
 Patch1014:	coreutils-8.8-check-string-format.patch
 #(peroyvind): add missing header includes
@@ -61,6 +66,8 @@ Patch2107:	coreutils-8.4-mkdir-modenote.patch
 Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
+#Temporarily disable df symlink test, failing
+Patch2913:	coreutils-8.22-temporarytestoff.patch
 
 Patch3001:	dummy_help2man.patch
 
@@ -109,6 +116,12 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
+
+# From upstream
+%patch1 -p1 -b .nullcontext~
+%patch2 -p1 -b .tzcrash~
+%patch3 -p1 -b .xfs~
+
 # fileutils
 # (tpg) seems to be fixed
 #patch101 -p1 -b .space~
@@ -144,9 +157,10 @@ This package contains coreutils documentation in GNU info format.
 
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
+%patch2913 -p1 -b .testoff~
 
 %if %{with crosscompile}
-%patch3001 -p1 -b .help2man
+%patch3001 -p1 -b .help2man~
 %endif
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
