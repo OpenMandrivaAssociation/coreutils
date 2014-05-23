@@ -2,13 +2,12 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.21
-Release:	8
+Version:	8.22
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
-Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
@@ -213,8 +212,8 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 /bin/*
 %{_bindir}/*
 %{_sbindir}/chroot
-%dir %{_libdir}/coreutils
-%{_libdir}/coreutils/libstdbuf.so
+%dir %{_libexecdir}/coreutils
+%{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
