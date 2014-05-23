@@ -165,6 +165,17 @@ automake --gnits --add-missing
 autoconf
 bzip2 -9 ChangeLog
 
+# XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
+sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
+
+#fix typos/mistakes in localized documentation(rhbz#439410, rhbz#440056)
+find ./po/ -name "*.p*" | xargs \
+ sed -i \
+ -e 's/-dpR/-cdpR/'
+
+# Regenerate manpages
+touch man/*.x
+
 %build
 %global optflags %{optflags} -Os
 %configure2_5x \
