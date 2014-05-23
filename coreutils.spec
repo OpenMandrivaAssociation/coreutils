@@ -42,23 +42,18 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 Patch911:	coreutils-8.3-groupfix.patch
 
 Patch1011:	coreutils-8.22-DIR_COLORS-mdkconf.patch
-#(peroyvind): fix a test that fails to compile with -Werror=format-security
-Patch1014:	coreutils-8.8-check-string-format.patch
 #(peroyvind): add missing header includes
-Patch1015:	coreutils-8.21-include-missing-headers.patch
+Patch1015:	coreutils-8.22-include-missing-headers.patch
 
 # fedora patches
-Patch2001:	coreutils-8.21-install-strip.patch
-Patch2002:	coreutils-aarch64-longlong.patch
-Patch2003:	coreutils-cp-nopreserve-invalidargs.patch
 #add note about no difference between binary/text mode on Linux - md5sum manpage
-Patch2101:	coreutils-8.9-manpages.patch
+Patch2101:	coreutils-8.22-manpages.patch
 #temporarily workaround probable kernel issue with TCSADRAIN(#504798)
 Patch2102:	coreutils-8.19-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-8.21-df-direct.patch
+Patch2104:	coreutils-8.22-df-direct.patch
 #add note about mkdir --mode behaviour into info documentation(#610559)
 Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
@@ -142,13 +137,9 @@ This package contains coreutils documentation in GNU info format.
 %patch911 -p1 -b .groups~
 
 %patch1011 -p1 -b .colors_mdkconf~
-%patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
 
 # From upstream
-%patch2001 -p1 -b .strip~
-%patch2002 -p1 -b .aarch64~
-%patch2003 -p1 -b .nopres~
 %patch2101 -p1 -b .manpages~
 %patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
@@ -163,7 +154,7 @@ This package contains coreutils documentation in GNU info format.
 %patch3001 -p1 -b .help2man~
 %endif
 
-chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
+chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
@@ -178,7 +169,7 @@ bzip2 -9 ChangeLog
 %configure2_5x \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
-    --enable-install-program=arch \
+	--enable-install-program=arch \
 	--without-selinux \
 	--disable-rpath \
 	--with-packager="%{packager}" \
