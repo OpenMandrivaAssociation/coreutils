@@ -183,7 +183,6 @@ touch man/*.x
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
 	--without-selinux \
-	--disable-rpath \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
