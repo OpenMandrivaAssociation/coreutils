@@ -75,6 +75,7 @@ BuildRequires:	acl-devel
 BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
+BuildRequires:	pkgconfig(openssl)
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -175,7 +176,8 @@ bzip2 -9 ChangeLog
 	--with-packager="%{packager}" \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
-	--with-tty-group
+	--with-tty-group \
+	--with-openssl
 
 %make
 
