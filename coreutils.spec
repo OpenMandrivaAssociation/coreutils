@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.22
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -178,7 +178,7 @@ touch man/*.x
 
 %build
 %global optflags %{optflags} -Os
-%configure2_5x \
+%configure \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
