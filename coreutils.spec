@@ -13,9 +13,6 @@ Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
 
 # From upstream
-Patch1:		coreutils-8.22-cp-selinux.patch
-Patch2:		coreutils-8.22-datetzcrash.patch
-Patch3:		coreutils-8.22-dd-sparsetest-xfsspeculativeprealloc.patch
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
@@ -113,11 +110,6 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
-
-# From upstream
-%patch1 -p1 -b .nullcontext~
-%patch2 -p1 -b .tzcrash~
-%patch3 -p1 -b .xfs~
 
 # fileutils
 # (tpg) seems to be fixed
