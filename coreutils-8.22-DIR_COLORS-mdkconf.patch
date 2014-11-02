@@ -1,38 +1,17 @@
---- coreutils-8.22/src/dircolors.hin.colors_mdkconf~	2013-12-04 15:48:30.000000000 +0100
-+++ coreutils-8.22/src/dircolors.hin	2014-05-23 18:45:06.562366889 +0200
-@@ -7,6 +7,23 @@
- 
+--- coreutils-8.15/src/dircolors.hin.colors_mdkconf~	2012-01-01 10:04:06.000000000 +0100
++++ coreutils-8.15/src/dircolors.hin	2012-01-10 08:36:22.599206624 +0100
+@@ -8,6 +8,10 @@
  # The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
  # slackware version of dircolors) are recognized but ignored.
-+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
-+EIGHTBIT 1
-+
-+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
-+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
-+# off.
-+COLOR tty
-+
-+# Extra command line options for ls go here.
-+# Basically these ones are:
-+#  -F = show '/' for dirs, '*' for executables, etc.
-+#  -T 0 = don't trust tab spacing when formatting ls output.
-+OPTIONS -F -T 0
-+
+ 
 +# This file goes in the /etc directory, and must be world readable.
 +# You can copy this file to .dir_colors in your $HOME directory to override
 +# the system defaults.
- 
++
  # Below, there should be one TERM entry for each termtype that is colorizable
  TERM Eterm
-@@ -31,6 +48,7 @@ TERM gnome
- TERM gnome-256color
- TERM jfbterm
- TERM konsole
-+TERM konsole-256color
- TERM kterm
- TERM linux
- TERM linux-c
-@@ -84,7 +102,8 @@ SOCK 01;35	# socket
+ TERM ansi
+@@ -81,7 +85,8 @@
  DOOR 01;35	# door
  BLK 40;33;01	# block device driver
  CHR 40;33;01	# character device driver
@@ -42,7 +21,7 @@
  SETUID 37;41	# file that is setuid (u+s)
  SETGID 30;43	# file that is setgid (g+s)
  CAPABILITY 30;41	# file with capability
-@@ -100,17 +119,17 @@ EXEC 01;32
+@@ -97,15 +102,15 @@
  # (and any comments you want to add after a '#')
  
  # If you use DOS-style suffixes, you may want to uncomment the following:
@@ -63,12 +42,9 @@
 +.sh  01;32
 +.csh 01;32
  
-- # archives or compressed (bright red)
-+# archives or compressed (bright red)
+  # archives or compressed (bright red)
  .tar 01;31
- .tgz 01;31
- .arc 01;31
-@@ -152,10 +171,13 @@ EXEC 01;32
+@@ -140,10 +145,13 @@
  .7z  01;31
  .rz  01;31
  .cab 01;31
@@ -82,7 +58,7 @@
  .gif 01;35
  .bmp 01;35
  .pbm 01;35
-@@ -167,6 +189,7 @@ EXEC 01;32
+@@ -155,6 +163,7 @@
  .tif 01;35
  .tiff 01;35
  .png 01;35
@@ -90,7 +66,7 @@
  .svg 01;35
  .svgz 01;35
  .mng 01;35
-@@ -178,6 +201,9 @@ EXEC 01;32
+@@ -166,6 +175,9 @@
  .mkv 01;35
  .webm 01;35
  .ogm 01;35
@@ -100,7 +76,7 @@
  .mp4 01;35
  .m4v 01;35
  .mp4v 01;35
-@@ -199,6 +225,7 @@ EXEC 01;32
+@@ -187,6 +199,7 @@
  .yuv 01;35
  .cgm 01;35
  .emf 01;35
@@ -108,7 +84,7 @@
  
  # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
  .axv 01;35
-@@ -224,3 +251,75 @@ EXEC 01;32
+@@ -212,3 +225,74 @@
  .oga 00;36
  .spx 00;36
  .xspf 00;36
@@ -179,8 +155,7 @@
 +.bck 47;30
 +.bk 47;30
 +.old 47;30
-+.orig 47;30
++.tmp 47;30
++.save 47;30
 +.rpmsave 47;30
 +.rpmnew 47;30
-+.save 47;30
-+.tmp 47;30

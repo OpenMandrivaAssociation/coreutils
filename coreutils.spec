@@ -16,7 +16,7 @@ Source4:	coreutils-colorls.csh
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
-Patch1155:	coreutils-8.20-force-option--override--interactive-option.patch
+Patch1155:	coreutils-8.23-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
@@ -39,6 +39,8 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 Patch911:	coreutils-8.3-groupfix.patch
 
 Patch1011:	coreutils-8.22-DIR_COLORS-mdkconf.patch
+#(peroyvind): fix a test that fails to compile with -Werror=format-security
+Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
 Patch1015:	coreutils-8.22-include-missing-headers.patch
 
@@ -50,7 +52,7 @@ Patch2102:	coreutils-8.19-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-8.22-df-direct.patch
+Patch2104:	coreutils-8.23-df-direct.patch
 #add note about mkdir --mode behaviour into info documentation(#610559)
 Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
@@ -131,6 +133,7 @@ This package contains coreutils documentation in GNU info format.
 %patch911 -p1 -b .groups~
 
 %patch1011 -p1 -b .colors_mdkconf~
+%patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
 
 # From upstream
@@ -183,7 +186,7 @@ touch man/*.x
 
 %make
 
-%check
+#check
 #make check
 
 %install
