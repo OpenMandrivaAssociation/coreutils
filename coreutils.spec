@@ -75,6 +75,7 @@ BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	help2man
 
 %rename		mktemp
 Provides:	stat = %{version}
