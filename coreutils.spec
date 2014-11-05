@@ -190,7 +190,7 @@ touch man/*.x
 	--with-tty-group \
 	--with-openssl
 
-%make
+%make -O
 
 #check
 #make check
