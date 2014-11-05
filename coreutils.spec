@@ -64,7 +64,10 @@ Patch2912:	coreutils-overflow.patch
 Patch2913:	coreutils-8.22-temporarytestoff.patch
 
 Patch3001:	dummy_help2man.patch
-
+BuildRequires:	locales-fr
+BuildRequires:	locales-ja
+BuildRequires:	locales-zh
+BuildRequires:	locales-tr
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gettext
@@ -75,7 +78,6 @@ BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(openssl)
-BuildRequires:	help2man
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -156,11 +158,12 @@ chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
-export DEFAULT_POSIX2_VERSION=199209
+export DEFAULT_POSIX2_VERSION=200112
 aclocal -I m4 --dont-fix
 automake --gnits --add-missing
-autoconf
-bzip2 -9 ChangeLog
+autoconf --force
+bzip2 -f9 ChangeLog
+bzip2 -f9 old/*/C*
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
 sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
@@ -174,6 +177,8 @@ find ./po/ -name "*.p*" | xargs \
 touch man/*.x
 
 %build
+%global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
+
 %configure \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
@@ -192,6 +197,9 @@ touch man/*.x
 
 %install
 %makeinstall_std
+
+# man pages are not installed with make install
+make mandir=%{buildroot}%{_mandir} install-man
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
