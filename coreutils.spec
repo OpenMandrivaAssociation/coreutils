@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.23
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -212,8 +212,8 @@ done
 
 # chroot was in /usr/sbin :
 mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
-# {cat,sort,cut} were previously moved from bin to /usr/bin and linked into 
-for f in cut env expr tac; do
+# {cat,sort,cut} were previously moved from bin to /usr/bin and linked into
+for f in cut env expr tac true; do
 	ln -s /bin/$f %{buildroot}%{_bindir}/$f
 done
 
