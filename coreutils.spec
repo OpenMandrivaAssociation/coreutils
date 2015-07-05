@@ -2,8 +2,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.23
-Release:	4
+Version:	8.24
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -85,8 +85,6 @@ Provides:	%{_bindir}/env
 Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Requires:	filesystem
-Requires:	setup
-Requires:	bash
 Obsoletes:	base64
 Suggests:	coreutils-doc
 Conflicts:	util-linux < 2.23.1-2
