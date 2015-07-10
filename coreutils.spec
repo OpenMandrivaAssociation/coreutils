@@ -16,7 +16,7 @@ Source4:	coreutils-colorls.csh
 
 # fileutils
 Patch101:	coreutils-8.2-spacedir.patch
-Patch1155:	coreutils-8.23-force-option--override--interactive-option.patch
+#Patch1155:	coreutils-8.23-force-option--override--interactive-option.patch needs a rediff
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
@@ -119,7 +119,7 @@ This package contains coreutils documentation in GNU info format.
 # fileutils
 # (tpg) seems to be fixed
 #patch101 -p1 -b .space~
-%patch1155 -p1 -b .override~
+#patch1155 -p1 -b .override~
 %patch118 -p1 -b .lsh~
 
 # textutils
