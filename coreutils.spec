@@ -161,8 +161,6 @@ export DEFAULT_POSIX2_VERSION=200112
 aclocal -I m4 --dont-fix
 automake --gnits --add-missing
 autoconf --force
-bzip2 -f9 ChangeLog
-bzip2 -f9 old/*/C*
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
 sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
@@ -171,9 +169,6 @@ sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutil
 find ./po/ -name "*.p*" | xargs \
  sed -i \
  -e 's/-dpR/-cdpR/'
-
-# Regenerate manpages
-touch man/*.x
 
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
@@ -188,6 +183,9 @@ touch man/*.x
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-tty-group \
 	--with-openssl
+
+# Regenerate manpages
+touch man/*.x
 
 %make
 
@@ -221,6 +219,11 @@ install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.c
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
+
+# (tpg) compress these files
+bzip2 -f9 ChangeLog
+bzip2 -f9 old/*/C*
+
 %find_lang %{name}
 
 %files -f %{name}.lang
