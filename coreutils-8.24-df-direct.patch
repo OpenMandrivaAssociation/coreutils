@@ -1,7 +1,7 @@
-diff -urNp coreutils-8.21-orig/doc/coreutils.texi coreutils-8.21/doc/coreutils.texi
---- coreutils-8.21-orig/doc/coreutils.texi	2013-02-11 10:37:28.000000000 +0100
-+++ coreutils-8.21/doc/coreutils.texi	2013-02-15 10:15:26.497593689 +0100
-@@ -10961,6 +10961,13 @@ pseudo-file-systems, such as automounter
+diff -Naur coreutils-8.24/doc/coreutils.texi coreutils-8.24.tpg/doc/coreutils.texi
+--- coreutils-8.24/doc/coreutils.texi	2015-06-26 17:05:22.000000000 +0000
++++ coreutils-8.24.tpg/doc/coreutils.texi	2015-07-14 20:35:52.401687894 +0000
+@@ -11273,6 +11273,13 @@
  Scale sizes by @var{size} before printing them (@pxref{Block size}).
  For example, @option{-BG} prints sizes in units of 1,073,741,824 bytes.
  
@@ -12,13 +12,13 @@ diff -urNp coreutils-8.21-orig/doc/coreutils.texi coreutils-8.21/doc/coreutils.t
 +especially useful for NFS mount points if there is a boundary between two
 +storage policies behind the mount point.
 +
- @item --total
- @opindex --total
- @cindex grand total of disk size, usage and available space
-diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
---- coreutils-8.21-orig/src/df.c	2013-02-05 00:40:31.000000000 +0100
-+++ coreutils-8.21/src/df.c	2013-02-15 10:26:41.158651782 +0100
-@@ -116,6 +116,9 @@ static bool print_type;
+ @item -b
+ @itemx --bytes
+ @opindex -b
+diff -Naur coreutils-8.24/src/df.c coreutils-8.24.tpg/src/df.c
+--- coreutils-8.24/src/df.c	2015-06-28 02:49:39.000000000 +0000
++++ coreutils-8.24.tpg/src/df.c	2015-07-14 20:39:31.912610105 +0000
+@@ -116,6 +116,9 @@
  /* If true, print a grand total at the end.  */
  static bool print_grand_total;
  
@@ -28,7 +28,7 @@ diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
  /* Grand total data.  */
  static struct fs_usage grand_fsu;
  
-@@ -238,13 +241,15 @@ enum
+@@ -243,13 +246,15 @@
    NO_SYNC_OPTION = CHAR_MAX + 1,
    SYNC_OPTION,
    TOTAL_OPTION,
@@ -45,7 +45,7 @@ diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
    {"inodes", no_argument, NULL, 'i'},
    {"human-readable", no_argument, NULL, 'h'},
    {"si", no_argument, NULL, 'H'},
-@@ -500,7 +505,10 @@ get_header (void)
+@@ -505,7 +510,10 @@
    for (col = 0; col < ncolumns; col++)
      {
        char *cell = NULL;
@@ -57,7 +57,7 @@ diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
  
        if (columns[col]->field == SIZE_FIELD
            && (header_mode == DEFAULT_MODE
-@@ -1150,6 +1158,19 @@ get_point (const char *point, const stru
+@@ -1346,6 +1354,19 @@
  static void
  get_entry (char const *name, struct stat const *statp)
  {
@@ -65,27 +65,27 @@ diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
 +    {
 +      char *resolved = canonicalize_file_name (name);
 +      if (resolved)
-+	{
++       {
 +         char *mp = find_mount_point (name, statp);
-+	  get_dev (NULL, mp, resolved, NULL, NULL, false, false, NULL, false);
++         get_dev (NULL, mp, resolved, NULL, NULL, false, false, NULL, false);
 +         free(mp);
-+	  free (resolved);
-+	  return;
-+	}
++         free (resolved);
++         return;
++       }
 +    }
 +
    if ((S_ISBLK (statp->st_mode) || S_ISCHR (statp->st_mode))
        && get_disk (name))
      return;
-@@ -1219,6 +1238,7 @@ or all file systems by default.\n\
+@@ -1416,6 +1437,7 @@
    -B, --block-size=SIZE  scale sizes by SIZE before printing them; e.g.,\n\
                             '-BM' prints sizes in units of 1,048,576 bytes;\n\
                             see SIZE format below\n\
 +      --direct          show statistics for a file instead of mount point\n\
-       --total           produce a grand total\n\
    -h, --human-readable  print sizes in powers of 1024 (e.g., 1023M)\n\
    -H, --si              print sizes in powers of 1000 (e.g., 1.1G)\n\
-@@ -1305,6 +1325,9 @@ main (int argc, char **argv)
+ "), stdout);
+@@ -1506,6 +1528,9 @@
                xstrtol_fatal (e, oi, c, long_options, optarg);
            }
            break;
@@ -95,23 +95,23 @@ diff -urNp coreutils-8.21-orig/src/df.c coreutils-8.21/src/df.c
          case 'i':
            if (header_mode == OUTPUT_MODE)
              {
-@@ -1408,6 +1431,13 @@ main (int argc, char **argv)
+@@ -1602,6 +1627,13 @@
          }
      }
  
 +  if (direct_statfs && show_local_fs)
 +    {
 +      error (0, 0, _("options --direct and --local (-l) are mutually "
-+		     "exclusive"));
++                    "exclusive"));
 +      usage (EXIT_FAILURE);
 +    }
 +
    if (human_output_opts == -1)
      {
        if (posix_format)
-diff -urNp coreutils-8.21-orig/tests/df/direct.sh coreutils-8.21/tests/df/direct.sh
---- coreutils-8.21-orig/tests/df/direct.sh	1970-01-01 01:00:00.000000000 +0100
-+++ coreutils-8.21/tests/df/direct.sh	2013-02-15 10:15:26.503644446 +0100
+diff -Naur coreutils-8.24/tests/df/direct.sh coreutils-8.24.tpg/tests/df/direct.sh
+--- coreutils-8.24/tests/df/direct.sh	1970-01-01 00:00:00.000000000 +0000
++++ coreutils-8.24.tpg/tests/df/direct.sh	2015-07-14 20:41:08.488214932 +0000
 @@ -0,0 +1,55 @@
 +#!/bin/sh
 +# Ensure "df --direct" works as documented

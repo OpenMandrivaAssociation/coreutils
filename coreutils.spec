@@ -15,8 +15,9 @@ Source4:	coreutils-colorls.csh
 # From upstream
 
 # fileutils
+# (tpg) 101 seems to be fixed
 Patch101:	coreutils-8.2-spacedir.patch
-#Patch1155:	coreutils-8.23-force-option--override--interactive-option.patch needs a rediff
+Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
@@ -38,11 +39,11 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.22-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.24-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
 Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
-Patch1015:	coreutils-8.22-include-missing-headers.patch
+Patch1015:	coreutils-8.24-include-missing-headers.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
@@ -52,7 +53,7 @@ Patch2102:	coreutils-8.19-sttytcsadrain.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-8.23-df-direct.patch
+Patch2104:	coreutils-8.24-df-direct.patch
 #add note about mkdir --mode behaviour into info documentation(#610559)
 Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
@@ -117,9 +118,7 @@ This package contains coreutils documentation in GNU info format.
 %setup -q
 
 # fileutils
-# (tpg) seems to be fixed
-#patch101 -p1 -b .space~
-#patch1155 -p1 -b .override~
+%patch1155 -p1 -b .override~
 %patch118 -p1 -b .lsh~
 
 # textutils
@@ -190,7 +189,7 @@ touch man/*.x
 	--with-tty-group \
 	--with-openssl
 
-%make -j1
+%make
 
 #check
 #make check
