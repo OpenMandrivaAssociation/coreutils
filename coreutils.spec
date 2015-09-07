@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.24
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -63,6 +63,7 @@ Patch2908:	coreutils-8.14-getgrouplist.patch
 Patch2912:	coreutils-overflow.patch
 #Temporarily disable df symlink test, failing
 Patch2913:	coreutils-8.22-temporarytestoff.patch
+Patch2914:	glibc-2.22-test-fix.patch
 
 Patch3001:	dummy_help2man.patch
 BuildRequires:	locales-fr
@@ -148,6 +149,7 @@ This package contains coreutils documentation in GNU info format.
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
 %patch2913 -p1 -b .testoff~
+%patch2914 -p1
 
 %if %{with crosscompile}
 %patch3001 -p1 -b .help2man~
