@@ -39,7 +39,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.24-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.25-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
 Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
@@ -47,9 +47,7 @@ Patch1015:	coreutils-8.24-include-missing-headers.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
-Patch2101:	coreutils-8.22-manpages.patch
-#temporarily workaround probable kernel issue with TCSADRAIN(#504798)
-Patch2102:	coreutils-8.19-sttytcsadrain.patch
+Patch2101:	coreutils-6.10-manpages.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
@@ -63,7 +61,6 @@ Patch2908:	coreutils-8.14-getgrouplist.patch
 Patch2912:	coreutils-overflow.patch
 #Temporarily disable df symlink test, failing
 Patch2913:	coreutils-8.22-temporarytestoff.patch
-Patch2914:	glibc-2.22-test-fix.patch
 
 Patch3001:	dummy_help2man.patch
 BuildRequires:	locales-fr
@@ -141,7 +138,6 @@ This package contains coreutils documentation in GNU info format.
 
 # From upstream
 %patch2101 -p1 -b .manpages~
-%patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
 %patch2104 -p1 -b .dfdirect~
 %patch2107 -p1 -b .mkdirmode~
@@ -149,7 +145,6 @@ This package contains coreutils documentation in GNU info format.
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
 %patch2913 -p1 -b .testoff~
-%patch2914 -p1
 
 %if %{with crosscompile}
 %patch3001 -p1 -b .help2man~
