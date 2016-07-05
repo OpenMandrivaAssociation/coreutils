@@ -2,20 +2,22 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.21
-Release:	12
+Version:	8.25
+Release:	0.1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
-Source1:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz.sig
 Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
 
+# From upstream
+
 # fileutils
+# (tpg) 101 seems to be fixed
 Patch101:	coreutils-8.2-spacedir.patch
-Patch1155:	coreutils-8.20-force-option--override--interactive-option.patch
+Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
 
@@ -37,33 +39,34 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.20-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.25-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
-Patch1014:	coreutils-8.8-check-string-format.patch
+Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
-Patch1015:	coreutils-8.21-include-missing-headers.patch
+Patch1015:	coreutils-8.24-include-missing-headers.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
-Patch2101:	coreutils-8.9-manpages.patch
-#temporarily workaround probable kernel issue with TCSADRAIN(#504798)
-Patch2102:	coreutils-8.19-sttytcsadrain.patch
+Patch2101:	coreutils-6.10-manpages.patch
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch2103:	coreutils-8.2-uname-processortype.patch
 #df --direct
-Patch2104:	coreutils-8.21-df-direct.patch
-#Fix mkstemp on sparc64
-Patch2105:	coreutils-mkstemp.patch
+Patch2104:	coreutils-8.24-df-direct.patch
+#add note about mkdir --mode behaviour into info documentation(#610559)
+Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
 #Prevent buffer overflow in who(1) (bug #158405).
 Patch2912:	coreutils-overflow.patch
+#Temporarily disable df symlink test, failing
+Patch2913:	coreutils-8.22-temporarytestoff.patch
 
-# Fix build on AArch64
-Patch3000:	coreutils-8.21-no-incorrect-aarch64-asm.patch
 Patch3001:	dummy_help2man.patch
-
+BuildRequires:	locales-fr
+BuildRequires:	locales-ja
+BuildRequires:	locales-zh
+BuildRequires:	locales-tr
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gettext
@@ -73,6 +76,7 @@ BuildRequires:	acl-devel
 BuildRequires:	attr-devel
 BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
+BuildRequires:	pkgconfig(openssl)
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -109,9 +113,8 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
+
 # fileutils
-# (tpg) seems to be fixed
-#patch101 -p1 -b .space~
 %patch1155 -p1 -b .override~
 %patch118 -p1 -b .lsh~
 
@@ -132,66 +135,77 @@ This package contains coreutils documentation in GNU info format.
 %patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
 
+# From upstream
 %patch2101 -p1 -b .manpages~
-%patch2102 -p1 -b .tcsadrain~
 %patch2103 -p1 -b .sysinfo~
 %patch2104 -p1 -b .dfdirect~
-
-%ifnarch %{arm}
-%patch2105 -p1 -b .sparc~
-%endif
+%patch2107 -p1 -b .mkdirmode~
 
 %patch2908 -p1 -b .getgrouplist~
 %patch2912 -p1 -b .overflow~
+%patch2913 -p1 -b .testoff~
 
-%patch3000 -p1 -b .aarch64~
 %if %{with crosscompile}
-%patch3001 -p1 -b .help2man
+%patch3001 -p1 -b .help2man~
 %endif
 
-chmod a+x tests/misc/sort-mb-tests.sh tests/misc/id-context.sh
+chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
 ./src/dcgen ./src/dircolors.hin > ./src/dircolors.h
 
-export DEFAULT_POSIX2_VERSION=199209
+export DEFAULT_POSIX2_VERSION=200112
 aclocal -I m4 --dont-fix
 automake --gnits --add-missing
-autoconf
-bzip2 -9 ChangeLog
+autoconf --force
+
+# XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
+sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
+
+#fix typos/mistakes in localized documentation(rhbz#439410, rhbz#440056)
+find ./po/ -name "*.p*" | xargs \
+ sed -i \
+ -e 's/-dpR/-cdpR/'
 
 %build
-%global optflags %{optflags} -Os
+%global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
+
 %configure2_5x \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
-    --enable-install-program=arch \
+	--enable-install-program=arch \
 	--without-selinux \
-	--disable-rpath \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
-	--with-tty-group
+	--with-tty-group \
+	--with-openssl
+
+# Regenerate manpages
+touch man/*.x
 
 %make
 
-%check
+#check
 #make check
 
 %install
 %makeinstall_std
 
+# man pages are not installed with make install
+make mandir=%{buildroot}%{_mandir} install-man
+
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
 for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-	mv %{buildroot}{%{_bindir},/bin}/$f
+    mv %{buildroot}{%{_bindir},/bin}/$f
 done
 
 # chroot was in /usr/sbin :
 mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
-# {cat,sort,cut} were previously moved from bin to /usr/bin and linked into 
-for f in cut env expr tac; do
-	ln -s /bin/$f %{buildroot}%{_bindir}/$f
+# {cat,sort,cut} were previously moved from bin to /usr/bin and linked into
+for f in cut env expr tac true; do
+    ln -s /bin/$f %{buildroot}%{_bindir}/$f
 done
 
 install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
@@ -201,6 +215,11 @@ install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.c
 
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
+
+# (tpg) compress these files
+bzip2 -f9 ChangeLog
+bzip2 -f9 old/*/C*
+
 %find_lang %{name}
 
 %files -f %{name}.lang
