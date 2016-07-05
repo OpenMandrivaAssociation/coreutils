@@ -3,7 +3,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.25
-Release:	2
+Release:	0.1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -83,7 +83,6 @@ Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
 Provides:	%{_bindir}/tr
-Requires:	filesystem
 Obsoletes:	base64
 Suggests:	coreutils-doc
 Conflicts:	util-linux < 2.23.1-2
@@ -170,7 +169,7 @@ find ./po/ -name "*.p*" | xargs \
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
 
-%configure \
+%configure2_5x \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
@@ -199,14 +198,14 @@ make mandir=%{buildroot}%{_mandir} install-man
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
 for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-	mv %{buildroot}{%{_bindir},/bin}/$f
+    mv %{buildroot}{%{_bindir},/bin}/$f
 done
 
 # chroot was in /usr/sbin :
 mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
 # {cat,sort,cut} were previously moved from bin to /usr/bin and linked into
 for f in cut env expr tac true; do
-	ln -s /bin/$f %{buildroot}%{_bindir}/$f
+    ln -s /bin/$f %{buildroot}%{_bindir}/$f
 done
 
 install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
