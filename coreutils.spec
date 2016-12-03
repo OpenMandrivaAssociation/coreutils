@@ -2,8 +2,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.25
-Release:	3
+Version:	8.26
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -39,7 +39,7 @@ Patch909:	coreutils-5.1.0-64bit-fixes.patch
 # https://qa.mandriva.com/show_bug.cgi?id=38577
 Patch911:	coreutils-8.3-groupfix.patch
 
-Patch1011:	coreutils-8.25-DIR_COLORS-mdkconf.patch
+Patch1011:	coreutils-8.26-DIR_COLORS-mdkconf.patch
 #(peroyvind): fix a test that fails to compile with -Werror=format-security
 Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
@@ -63,6 +63,7 @@ Patch2912:	coreutils-overflow.patch
 Patch2913:	coreutils-8.22-temporarytestoff.patch
 
 Patch3001:	dummy_help2man.patch
+
 BuildRequires:	locales-fr
 BuildRequires:	locales-ja
 BuildRequires:	locales-zh
@@ -131,7 +132,6 @@ This package contains coreutils documentation in GNU info format.
 
 %patch909 -p1 -b .64bit~
 %patch911 -p1 -b .groups~
-
 %patch1011 -p1 -b .colors_mdkconf~
 %patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
@@ -199,14 +199,14 @@ make mandir=%{buildroot}%{_mandir} install-man
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
 for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-	mv %{buildroot}{%{_bindir},/bin}/$f
+    mv %{buildroot}{%{_bindir},/bin}/$f
 done
 
 # chroot was in /usr/sbin :
 mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
 # {cat,sort,cut} were previously moved from bin to /usr/bin and linked into
 for f in cut env expr tac true; do
-	ln -s /bin/$f %{buildroot}%{_bindir}/$f
+    ln -s /bin/$f %{buildroot}%{_bindir}/$f
 done
 
 install -p -m644 src/dircolors.hin -D %{buildroot}%{_sysconfdir}/DIR_COLORS
@@ -224,7 +224,6 @@ bzip2 -f9 old/*/C*
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc README
 %config(noreplace) %{_sysconfdir}/DIR_COLORS
 %config(noreplace) %{_sysconfdir}/DIR_COLORS.256color
 %{_sysconfdir}/profile.d/90_colorls.sh
@@ -236,7 +235,7 @@ bzip2 -f9 old/*/C*
 %{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
-%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO
+%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO README
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
 
