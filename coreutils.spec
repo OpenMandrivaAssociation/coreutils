@@ -84,7 +84,6 @@ Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
 Provides:	%{_bindir}/tr
-Requires:	filesystem
 Obsoletes:	base64
 Suggests:	coreutils-doc
 Conflicts:	util-linux < 2.23.1-2
@@ -170,7 +169,7 @@ find ./po/ -name "*.p*" | xargs \
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
 
-%configure \
+%configure2_5x \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
