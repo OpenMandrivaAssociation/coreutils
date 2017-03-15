@@ -2,7 +2,7 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.26
+Version:	8.27
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -169,7 +169,7 @@ find ./po/ -name "*.p*" | xargs \
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
 
-%configure2_5x \
+%configure \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
@@ -237,4 +237,3 @@ bzip2 -f9 old/*/C*
 %doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO README
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
-
