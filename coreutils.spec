@@ -168,6 +168,10 @@ find ./po/ -name "*.p*" | xargs \
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
 
+# disabled when build as single binary:
+# openssl
+# gmp
+
 %configure \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
@@ -178,9 +182,7 @@ find ./po/ -name "*.p*" | xargs \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-tty-group \
 	--enable-single-binary=symlinks \
-# disabled when build as single binary
 	--without-openssl \
-# disabled when build as single binary
 	--without-gmp
 
 # Regenerate manpages
