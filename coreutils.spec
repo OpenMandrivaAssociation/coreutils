@@ -232,8 +232,8 @@ bzip2 -f9 ChangeLog
 %{_sysconfdir}/profile.d/90_colorls.sh
 %{_sysconfdir}/profile.d/90_colorls.csh
 /bin/*
-%{_bindir}/*.single
-%{_sbindir}/chroot.single
+%{_bindir}/*
+%{_sbindir}/chroot
 %dir %{_libexecdir}/coreutils
 %{_libexecdir}/coreutils/libstdbuf.so
 
