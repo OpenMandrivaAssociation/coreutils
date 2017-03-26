@@ -1,4 +1,9 @@
-%bcond_with	crosscompile
+%bcond_with crosscompile
+
+%if %mdvver >= 3000000
+# (tpg) build coreutils as a single binary
+%bcond_without single
+%endif
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
@@ -73,9 +78,11 @@ BuildRequires:	texinfo >= 4.3
 BuildRequires:	acl-devel
 BuildRequires:	attr-devel
 BuildRequires:	cap-devel
+%if !%{with single}
 # disabled when build as single binary
-#BuildRequires:	gmp-devel
-#BuildRequires:	pkgconfig(openssl)
+BuildRequires:	gmp-devel
+BuildRequires:	pkgconfig(openssl)
+%endif
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -180,10 +187,16 @@ find ./po/ -name "*.p*" | xargs \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
-	--with-tty-group \
+%if %{with single}
 	--enable-single-binary=symlinks \
 	--without-openssl \
-	--without-gmp
+	--without-gmp \
+%else
+	--disable-single-binary \
+	--with-openssl \
+	--with-gmp \
+%endif
+	--with-tty-group
 
 # Regenerate manpages
 touch man/*.x
