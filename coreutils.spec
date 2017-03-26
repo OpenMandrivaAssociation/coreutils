@@ -16,13 +16,9 @@ Source4:	coreutils-colorls.csh
 Patch1:		coreutils-8.27-date-debug-test.patch
 
 # fileutils
-# (tpg) 101 seems to be fixed
-Patch101:	coreutils-8.2-spacedir.patch
 Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
-
-# sh-utils
 
 #add info about TZ envvar to date manpage
 Patch703:	coreutils-8.21-dateman.patch
@@ -76,9 +72,10 @@ BuildRequires:	strace
 BuildRequires:	texinfo >= 4.3
 BuildRequires:	acl-devel
 BuildRequires:	attr-devel
-BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
-BuildRequires:	pkgconfig(openssl)
+# disabled when build as single binary
+#BuildRequires:	gmp-devel
+#BuildRequires:	pkgconfig(openssl)
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -180,7 +177,11 @@ find ./po/ -name "*.p*" | xargs \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
 	--with-tty-group \
-	--with-openssl
+	--enable-single-binary=symlinks \
+# disabled when build as single binary
+	--without-openssl \
+# disabled when build as single binary
+	--without-gmp
 
 # Regenerate manpages
 touch man/*.x
@@ -230,8 +231,8 @@ bzip2 -f9 old/*/C*
 %{_sysconfdir}/profile.d/90_colorls.sh
 %{_sysconfdir}/profile.d/90_colorls.csh
 /bin/*
-%{_bindir}/*
-%{_sbindir}/chroot
+%{_bindir}/*.single
+%{_sbindir}/chroot.single
 %dir %{_libexecdir}/coreutils
 %{_libexecdir}/coreutils/libstdbuf.so
 
