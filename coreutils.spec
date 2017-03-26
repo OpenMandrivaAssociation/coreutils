@@ -223,7 +223,6 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 
 # (tpg) compress these files
 bzip2 -f9 ChangeLog
-bzip2 -f9 old/*/C*
 
 %find_lang %{name}
 
