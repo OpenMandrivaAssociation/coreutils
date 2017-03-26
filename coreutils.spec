@@ -8,7 +8,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.27
-Release:	1
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -214,9 +214,9 @@ make mandir=%{buildroot}%{_mandir} install-man
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
-for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
+for f in basename arch cat chgrp chmod chown coreutils cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-    mv %{buildroot}{%{_bindir},/bin}/$f
+    mv %{buildroot}{%{_bindir},/bin}/$f || :
 done
 
 # chroot was in /usr/sbin :
@@ -234,8 +234,20 @@ install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.c
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
 
+%if %{with single}
+# Coreutils lives in /bin, not /usr/bin
+for i in %{_bindir} %{_sbindir}; do
+	cd %{buildroot}$i
+	for i in *; do
+		rm $i
+		ln -sf ../../bin/coreutils $i
+	done
+	cd -
+done
+%endif
+
 # (tpg) compress these files
-bzip2 -f9 ChangeLog
+xz -9ef ChangeLog
 
 %find_lang %{name}
 
@@ -251,6 +263,6 @@ bzip2 -f9 ChangeLog
 %{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
-%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO README
+%doc ABOUT-NLS ChangeLog.xz NEWS THANKS TODO README
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
