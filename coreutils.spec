@@ -1,9 +1,14 @@
-%bcond_with	crosscompile
+%bcond_with crosscompile
+
+%if %mdvver >= 3000000
+# (tpg) build coreutils as a single binary
+%bcond_without single
+%endif
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.26
-Release:	1
+Version:	8.27
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -13,15 +18,12 @@ Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
 
 # From upstream
+Patch1:		coreutils-8.27-date-debug-test.patch
 
 # fileutils
-# (tpg) 101 seems to be fixed
-Patch101:	coreutils-8.2-spacedir.patch
 Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
 Patch500:	coreutils-8.3-mem.patch
-
-# sh-utils
 
 #add info about TZ envvar to date manpage
 Patch703:	coreutils-8.21-dateman.patch
@@ -75,16 +77,18 @@ BuildRequires:	strace
 BuildRequires:	texinfo >= 4.3
 BuildRequires:	acl-devel
 BuildRequires:	attr-devel
-BuildRequires:	gmp-devel
 BuildRequires:	cap-devel
+%if !%{with single}
+# disabled when build as single binary
+BuildRequires:	gmp-devel
 BuildRequires:	pkgconfig(openssl)
+%endif
 
 %rename		mktemp
 Provides:	stat = %{version}
 Provides:	%{_bindir}/env
 Provides:	/bin/env
 Provides:	%{_bindir}/tr
-Requires:	filesystem
 Obsoletes:	base64
 Suggests:	coreutils-doc
 Conflicts:	util-linux < 2.23.1-2
@@ -115,6 +119,7 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
+%patch1 -p1
 
 # fileutils
 %patch1155 -p1 -b .override~
@@ -170,6 +175,10 @@ find ./po/ -name "*.p*" | xargs \
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
 
+# disabled when build as single binary:
+# openssl
+# gmp
+
 %configure \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
@@ -178,8 +187,16 @@ find ./po/ -name "*.p*" | xargs \
 	--with-packager="%{packager}" \
 	--with-packager-version="%{version}-%{release}" \
 	--with-packager-bug-reports="%{bugurl}" \
-	--with-tty-group \
-	--with-openssl
+%if %{with single}
+	--enable-single-binary=symlinks \
+	--without-openssl \
+	--without-gmp \
+%else
+	--disable-single-binary \
+	--with-openssl \
+	--with-gmp \
+%endif
+	--with-tty-group
 
 # Regenerate manpages
 touch man/*.x
@@ -197,9 +214,9 @@ make mandir=%{buildroot}%{_mandir} install-man
 
 # let be compatible with old fileutils, sh-utils and textutils packages :
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
-for f in basename arch cat chgrp chmod chown cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
+for f in basename arch cat chgrp chmod chown coreutils cp cut date dd df echo env expr false id link ln ls mkdir mknod mktemp mv nice pwd rm rmdir sleep sort stat stty sync touch true uname unlink tac
 do
-    mv %{buildroot}{%{_bindir},/bin}/$f
+    mv %{buildroot}{%{_bindir},/bin}/$f || :
 done
 
 # chroot was in /usr/sbin :
@@ -217,9 +234,20 @@ install -p -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/profile.d/90_colorls.c
 #TV# find_lang look for LC_MESSAGES, not LC_TIME:
 find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs rm -f
 
+%if %{with single}
+# Coreutils lives in /bin, not /usr/bin
+for i in %{_bindir} %{_sbindir}; do
+	cd %{buildroot}$i
+	for i in *; do
+		rm $i
+		ln -sf ../../bin/coreutils $i
+	done
+	cd -
+done
+%endif
+
 # (tpg) compress these files
-bzip2 -f9 ChangeLog
-bzip2 -f9 old/*/C*
+xz -9ef ChangeLog
 
 %find_lang %{name}
 
@@ -235,7 +263,6 @@ bzip2 -f9 old/*/C*
 %{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
-%doc ABOUT-NLS ChangeLog.bz2 NEWS THANKS TODO README
+%doc ABOUT-NLS ChangeLog.xz NEWS THANKS TODO README
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
-
