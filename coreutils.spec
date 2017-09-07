@@ -7,8 +7,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.27
-Release:	3
+Version:	8.28
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -16,9 +16,6 @@ Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
-
-# From upstream
-Patch1:		coreutils-8.27-date-debug-test.patch
 
 # fileutils
 Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
