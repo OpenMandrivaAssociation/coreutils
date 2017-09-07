@@ -17,9 +17,6 @@ Source2:	coreutils-DIR_COLORS.256color
 Source3:	coreutils-colorls.sh
 Source4:	coreutils-colorls.csh
 
-# From upstream
-Patch1:		coreutils-8.27-date-debug-test.patch
-
 # fileutils
 Patch1155:	coreutils-8.24-force-option--override--interactive-option.patch
 Patch118:	fileutils-4.1-ls_h.patch
