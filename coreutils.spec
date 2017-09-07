@@ -56,8 +56,6 @@ Patch2107:	coreutils-8.4-mkdir-modenote.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
-#Prevent buffer overflow in who(1) (bug #158405).
-Patch2912:	coreutils-overflow.patch
 #Temporarily disable df symlink test, failing
 Patch2913:	coreutils-8.22-temporarytestoff.patch
 
@@ -144,14 +142,11 @@ This package contains coreutils documentation in GNU info format.
 %patch2107 -p1 -b .mkdirmode~
 
 %patch2908 -p1 -b .getgrouplist~
-%patch2912 -p1 -b .overflow~
 %patch2913 -p1 -b .testoff~
 
 %if %{with crosscompile}
 %patch3001 -p1 -b .help2man~
 %endif
-
-
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
@@ -164,11 +159,6 @@ autoconf --force
 
 # XXX docs should say /var/run/[uw]tmp not /etc/[uw]tmp
 sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
-
-#fix typos/mistakes in localized documentation(rhbz#439410, rhbz#440056)
-find ./po/ -name "*.p*" | xargs \
- sed -i \
- -e 's/-dpR/-cdpR/'
 
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
