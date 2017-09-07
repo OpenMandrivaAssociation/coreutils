@@ -116,7 +116,6 @@ This package contains coreutils documentation in GNU info format.
 
 %prep
 %setup -q
-%patch1 -p1
 
 # fileutils
 %patch1155 -p1 -b .override~
