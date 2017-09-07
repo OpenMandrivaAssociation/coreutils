@@ -62,8 +62,6 @@ Patch2912:	coreutils-overflow.patch
 Patch2913:	coreutils-8.22-temporarytestoff.patch
 
 Patch3001:	dummy_help2man.patch
-# (tpg) try to fix build with gcc6 nad llvm < 5.0
-Patch3002:	coreutils-8.28-llvm-compat-gcc6.patch
 
 BuildRequires:	locales-fr
 BuildRequires:	locales-ja
@@ -153,9 +151,7 @@ This package contains coreutils documentation in GNU info format.
 %patch3001 -p1 -b .help2man~
 %endif
 
-%if %mdvver <= 3000000
-%patch3002 -p1
-%endif
+
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
@@ -176,6 +172,11 @@ find ./po/ -name "*.p*" | xargs \
 
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
+# (tpg) build with gcc as new coreutils needs newer compiler
+%if %mdvver <= 3000000
+export CC=gcc
+export CXX=g++
+%endif
 
 # disabled when build as single binary:
 # openssl
