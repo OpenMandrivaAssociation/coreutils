@@ -8,7 +8,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.28
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -53,6 +53,20 @@ Patch2103:	coreutils-8.2-uname-processortype.patch
 Patch2104:	coreutils-8.24-df-direct.patch
 #add note about mkdir --mode behaviour into info documentation(#610559)
 Patch2107:	coreutils-8.4-mkdir-modenote.patch
+# (sb) lin18nux/lsb compliance - expand/unexpand
+Patch2108:	coreutils-i18n-expand-unexpand.patch
+# i18n patch for cut - old version - used
+Patch2109:	coreutils-i18n-cut-old.patch
+# The unexpand patch above is not correct. Sent to the patch authors
+Patch2110:	coreutils-i18n-fix-unexpand.patch
+#(un)expand - allow multiple files on input - broken by patch 801
+Patch2111:	coreutils-i18n-fix2-expand-unexpand.patch
+#(un)expand - test BOM headers
+Patch2112:	coreutils-i18n-un-expand-BOM.patch
+# make 'sort -h' work for arbitrary column even when using UTF-8 locales
+Patch2113:	coreutils-i18n-sort-human.patch
+# fold: preserve new-lines in mutlibyte text (#1418505)
+Patch2114:	coreutils-i18n-fold-newline.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
@@ -140,6 +154,13 @@ This package contains coreutils documentation in GNU info format.
 %patch2103 -p1 -b .sysinfo~
 %patch2104 -p1 -b .dfdirect~
 %patch2107 -p1 -b .mkdirmode~
+%patch2108 -p1
+%patch2109 -p1
+%patch2110 -p1
+%patch2111 -p1
+%patch2112 -p1
+%patch2113 -p1
+%patch2114 -p1
 
 %patch2908 -p1 -b .getgrouplist~
 %patch2913 -p1 -b .testoff~
