@@ -183,11 +183,11 @@ sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutil
 
 %build
 %global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
-# (tpg) build with gcc as new coreutils needs newer compiler
-%if %mdvver <= 3000000
+# (tpg) LLVM/clang still does not support __builtin_mul_overflow_p
+# while gnulib does not detects LLVM/clang well
+# there are to many gnu'isms
 export CC=gcc
 export CXX=g++
-%endif
 
 # disabled when build as single binary:
 # openssl
