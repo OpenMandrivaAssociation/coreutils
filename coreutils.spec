@@ -5,10 +5,13 @@
 %bcond_without single
 %endif
 
+# (tpg) optimize it a bit
+%global optflags %optflags -O3
+
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.28
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
