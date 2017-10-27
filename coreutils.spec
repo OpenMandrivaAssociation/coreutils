@@ -264,7 +264,7 @@ done
 %endif
 
 # (tpg) compress these files
-xz -9ef ChangeLog
+xz --text ChangeLog
 
 %find_lang %{name}
 
