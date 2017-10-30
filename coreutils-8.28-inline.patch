@@ -1,0 +1,11 @@
+--- coreutils-8.28/lib/config.hin.omv~	2017-10-30 18:50:39.207360654 +0100
++++ coreutils-8.28/lib/config.hin	2017-10-30 18:50:45.436345927 +0100
+@@ -3322,7 +3322,7 @@
+          && !defined __PGI \
+          && !(defined __SUNPRO_C && __STDC__))) \
+      && !defined _GL_EXTERN_INLINE_STDHEADER_BUG)
+-# define _GL_INLINE inline
++# define _GL_INLINE static inline
+ # define _GL_EXTERN_INLINE extern inline
+ # define _GL_EXTERN_INLINE_IN_USE
+ #elif (2 < __GNUC__ + (7 <= __GNUC_MINOR__) && !defined __STRICT_ANSI__ \
