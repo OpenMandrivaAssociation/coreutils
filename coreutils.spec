@@ -6,12 +6,12 @@
 %endif
 
 # (tpg) optimize it a bit
-%global optflags %optflags -O3
+%global optflags %{optflags} -O3 --rtlib=compiler-rt
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.28
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -46,6 +46,9 @@ Patch1011:	coreutils-8.26-DIR_COLORS-mdkconf.patch
 Patch1014:	coreutils-8.22-check-string-format.patch
 #(peroyvind): add missing header includes
 Patch1015:	coreutils-8.24-include-missing-headers.patch
+# https://github.com/coreutils/coreutils/issues/11
+Patch1016:	coreutils-8.28-check-for-__builtin_mul_overflow_p.patch
+Patch1017:	coreutils-8.28-inline.patch
 
 # fedora patches
 #add note about no difference between binary/text mode on Linux - md5sum manpage
@@ -151,6 +154,8 @@ This package contains coreutils documentation in GNU info format.
 %patch1011 -p1 -b .colors_mdkconf~
 %patch1014 -p1 -b .str_fmt~
 %patch1015 -p1 -b .hdrs~
+%patch1016 -p1 -b .builtin~
+%patch1017 -p1 -b .inline~
 
 # From upstream
 %patch2101 -p1 -b .manpages~
@@ -185,12 +190,7 @@ autoconf --force
 sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
 
 %build
-%global optflags %{optflags} -fPIC -D_GNU_SOURCE=1
-# (tpg) LLVM/clang still does not support __builtin_mul_overflow_p
-# while gnulib does not detects LLVM/clang well
-# there are to many gnu'isms
-export CC=gcc
-export CXX=g++
+%global optflags %{optflags} -fPIE -D_GNU_SOURCE=1
 
 # disabled when build as single binary:
 # openssl
