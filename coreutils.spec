@@ -6,7 +6,7 @@
 %endif
 
 # (tpg) optimize it a bit
-%global optflags %{optflags} -O3 --rtlib=compiler-rt
+%global optflags %{optflags} -O3 -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
@@ -76,9 +76,6 @@ Patch2114:	coreutils-i18n-fold-newline.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
-#Temporarily disable df symlink test, failing
-Patch2913:	coreutils-8.22-temporarytestoff.patch
-
 Patch3001:	dummy_help2man.patch
 
 BuildRequires:	locales-fr
@@ -122,14 +119,14 @@ Most of these programs have significant advantages over their Unix
 counterparts, such as greater speed, additional options, and fewer
 arbitrary limits.
 
-%package	doc
+%package doc
 Summary:	Coreutils documentation in info format
 Group:		Books/Computer books
 Requires:	coreutils
 BuildArch:	noarch
 Conflicts:	util-linux < 2.23.1-2
 
-%description	doc
+%description doc
 This package contains coreutils documentation in GNU info format.
 
 %prep
@@ -171,7 +168,6 @@ This package contains coreutils documentation in GNU info format.
 %patch2114 -p1
 
 %patch2908 -p1 -b .getgrouplist~
-%patch2913 -p1 -b .testoff~
 
 %if %{with crosscompile}
 %patch3001 -p1 -b .help2man~
@@ -190,8 +186,6 @@ autoconf --force
 sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutils.texi
 
 %build
-%global optflags %{optflags} -fPIE -D_GNU_SOURCE=1
-
 # disabled when build as single binary:
 # openssl
 # gmp
@@ -208,6 +202,7 @@ sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutil
 	--enable-single-binary=symlinks \
 	--without-openssl \
 	--without-gmp \
+	--enable-single-binary-exceptions=expr,factor,rm \
 %else
 	--disable-single-binary \
 	--with-openssl \
@@ -254,12 +249,12 @@ find %{buildroot}%{_datadir}/locale/ -name coreutils.mo | grep LC_TIME | xargs r
 %if %{with single}
 # Coreutils lives in /bin, not /usr/bin
 for i in %{_bindir} %{_sbindir}; do
-	cd %{buildroot}$i
+    cd %{buildroot}$i
 	for i in *; do
-		rm $i
-		ln -sf ../../bin/coreutils $i
+	    rm $i
+	    ln -sf ../../bin/coreutils $i
 	done
-	cd -
+    cd -
 done
 %endif
 
