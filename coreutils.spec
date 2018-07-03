@@ -11,7 +11,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.30
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -202,7 +202,6 @@ sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutil
 	--enable-single-binary=symlinks \
 	--without-openssl \
 	--without-gmp \
-	--enable-single-binary-exceptions=expr,factor,rm \
 %else
 	--disable-single-binary \
 	--with-openssl \
