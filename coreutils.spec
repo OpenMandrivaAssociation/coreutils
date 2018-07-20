@@ -6,12 +6,12 @@
 %endif
 
 # (tpg) optimize it a bit
-%global optflags %{optflags} -O3 -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
+%global optflags %{optflags} -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.30
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
