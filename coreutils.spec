@@ -8,10 +8,14 @@
 # (tpg) optimize it a bit
 %global optflags %{optflags} -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
 
+# do not make coreutils-single depend on /usr/bin/coreutils
+%global __requires_exclude ^/%{_bin}/coreutils$
+
+
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.30
-Release:	6
+Version:	8.31
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -130,7 +134,7 @@ Conflicts:	util-linux < 2.23.1-2
 This package contains coreutils documentation in GNU info format.
 
 %prep
-%setup -q
+%autosetup
 
 # fileutils
 %patch1155 -p1 -b .override~
@@ -212,13 +216,13 @@ sed -e 's,/etc/utmp,/var/run/utmp,g;s,/etc/wtmp,/var/run/wtmp,g' -i doc/coreutil
 # Regenerate manpages
 touch man/*.x
 
-%make
+%make_build
 
 #check
 #make check
 
 %install
-%makeinstall_std
+%make_install
 
 # man pages are not installed with make install
 make mandir=%{buildroot}%{_mandir} install-man
