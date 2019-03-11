@@ -80,7 +80,9 @@ Patch2114:	coreutils-i18n-fold-newline.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
+%if %{with crosscompile}
 Patch3001:	dummy_help2man.patch
+%endif
 
 BuildRequires:	locales-fr
 BuildRequires:	locales-ja
@@ -134,48 +136,7 @@ Conflicts:	util-linux < 2.23.1-2
 This package contains coreutils documentation in GNU info format.
 
 %prep
-%autosetup
-
-# fileutils
-%patch1155 -p1 -b .override~
-%patch118 -p1 -b .lsh~
-
-# textutils
-%patch500 -p1
-
-# sh-utils
-%patch703 -p1 -b .dateman~
-%patch713 -p1 -b .langinfo~
-
-# li18nux/lsb
-%patch800 -p1 -b .i18n~
-
-%patch909 -p1 -b .64bit~
-%patch911 -p1 -b .groups~
-%patch1011 -p1 -b .colors_mdkconf~
-%patch1014 -p1 -b .str_fmt~
-%patch1015 -p1 -b .hdrs~
-%patch1016 -p1 -b .builtin~
-%patch1017 -p1 -b .inline~
-
-# From upstream
-%patch2101 -p1 -b .manpages~
-%patch2103 -p1 -b .sysinfo~
-%patch2104 -p1 -b .dfdirect~
-%patch2107 -p1 -b .mkdirmode~
-%patch2108 -p1
-%patch2109 -p1
-%patch2110 -p1
-%patch2111 -p1
-%patch2112 -p1
-%patch2113 -p1
-%patch2114 -p1
-
-%patch2908 -p1 -b .getgrouplist~
-
-%if %{with crosscompile}
-%patch3001 -p1 -b .help2man~
-%endif
+%autosetup -p1
 
 chmod a+x tests/misc/sort-mb-tests.sh tests/df/direct.sh tests/cp/no-ctx.sh
 chmod +w ./src/dircolors.h
