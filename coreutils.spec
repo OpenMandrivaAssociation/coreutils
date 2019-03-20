@@ -6,7 +6,9 @@
 %endif
 
 # (tpg) optimize it a bit
+%ifnarch riscv64
 %global optflags %{optflags} -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
+%endif
 
 # do not make coreutils-single depend on /usr/bin/coreutils
 %global __requires_exclude ^/%{_bin}/coreutils$
