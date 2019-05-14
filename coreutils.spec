@@ -13,7 +13,6 @@
 # do not make coreutils-single depend on /usr/bin/coreutils
 %global __requires_exclude ^/%{_bin}/coreutils$
 
-
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.31
@@ -98,6 +97,7 @@ BuildRequires:	texinfo >= 4.3
 BuildRequires:	acl-devel
 BuildRequires:	attr-devel
 BuildRequires:	cap-devel
+BuildRequires:	hostname
 %if !%{with single}
 # disabled when build as single binary
 BuildRequires:	gmp-devel
