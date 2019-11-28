@@ -5,9 +5,9 @@
 %bcond_without single
 %endif
 
-# (tpg) optimize it a bit
+# (tpg) optimize size a bit
 %ifnarch riscv64
-%global optflags %{optflags} -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
+%global optflags %{optflags} -Oz -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
 %endif
 
 # do not make coreutils-single depend on /usr/bin/coreutils
@@ -16,7 +16,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.31
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
