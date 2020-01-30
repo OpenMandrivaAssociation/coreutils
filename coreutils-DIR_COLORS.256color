@@ -129,6 +129,8 @@ EXEC 01;32
 .rz  01;31
 .cab 01;31
 .iso 01;31
+.zst 01;31
+.zstd 01;31
 
 # image formats (magenta)
 .jpg 01;35
