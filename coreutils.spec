@@ -1,9 +1,7 @@
 %bcond_with crosscompile
 
-%if %mdvver >= 3000000
 # (tpg) build coreutils as a single binary
 %bcond_without single
-%endif
 
 # (tpg) optimize size a bit
 %ifnarch riscv64
@@ -15,8 +13,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	8.31
-Release:	3
+Version:	8.32
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
