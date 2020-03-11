@@ -76,9 +76,14 @@ Patch2112:	coreutils-i18n-un-expand-BOM.patch
 Patch2113:	coreutils-i18n-sort-human.patch
 # fold: preserve new-lines in mutlibyte text (#1418505)
 Patch2114:	coreutils-i18n-fold-newline.patch
+# do not use IF_LINT for initialization of scalar variables
+Patch2115:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-if-lint.patch
+# ls: restore 8.31 behavior on removed directories
+Patch2116:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-ls-removed-dir.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
+
 %if %{with crosscompile}
 Patch3001:	dummy_help2man.patch
 %endif
