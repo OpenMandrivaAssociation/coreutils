@@ -5,7 +5,8 @@
 
 # (tpg) optimize size a bit
 %ifnarch riscv64
-%global optflags %{optflags} -Oz -fPIE -D_GNU_SOURCE=1 --rtlib=compiler-rt
+%global optflags %{optflags} -Oz -fPIE -D_GNU_SOURCE=1
+#--rtlib=compiler-rt
 %endif
 
 # do not make coreutils-single depend on /usr/bin/coreutils

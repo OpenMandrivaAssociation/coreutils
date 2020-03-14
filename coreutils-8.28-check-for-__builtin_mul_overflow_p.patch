@@ -1,6 +1,7 @@
---- coreutils-8.28/configure.ac.omv~	2017-10-30 17:14:36.543445080 +0100
-+++ coreutils-8.28/configure.ac	2017-10-30 17:27:19.273190455 +0100
-@@ -330,6 +330,18 @@ if test $ac_cv_func_syslog = no; then
+diff -Naur coreutils-8.32/configure.ac coreutils-8.32.tpg/configure.ac
+--- coreutils-8.32/configure.ac	2020-02-27 21:45:34.000000000 +0000
++++ coreutils-8.32.tpg/configure.ac	2020-03-14 11:50:04.933837427 +0000
+@@ -334,6 +334,18 @@
    done
  fi
  
@@ -19,13 +20,27 @@
  AC_CACHE_CHECK([for 3-argument setpriority function],
    [utils_cv_func_setpriority],
    [AC_LINK_IFELSE(
---- coreutils-8.28/lib/intprops.h.omv~	2017-10-30 17:18:59.757654086 +0100
-+++ coreutils-8.28/lib/intprops.h	2017-10-30 17:30:42.752601713 +0100
-@@ -225,14 +225,11 @@
- # define _GL_HAS_BUILTIN_OVERFLOW 0
+diff -Naur coreutils-8.32/lib/fts.c coreutils-8.32.tpg/lib/fts.c
+--- coreutils-8.32/lib/fts.c	2020-01-01 14:14:23.000000000 +0000
++++ coreutils-8.32.tpg/lib/fts.c	2020-03-14 11:52:20.788108201 +0000
+@@ -200,7 +200,7 @@
  #endif
  
--/* True if __builtin_add_overflow_p (A, B, C) works.  */
+ #ifndef FALLTHROUGH
+-# if __GNUC__ < 7
++# if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
+ #  define FALLTHROUGH ((void) 0)
+ # else
+ #  define FALLTHROUGH __attribute__ ((__fallthrough__))
+diff -Naur coreutils-8.32/lib/intprops.h coreutils-8.32.tpg/lib/intprops.h
+--- coreutils-8.32/lib/intprops.h	2020-01-01 14:19:22.000000000 +0000
++++ coreutils-8.32.tpg/lib/intprops.h	2020-03-14 11:51:18.088987533 +0000
+@@ -238,15 +238,11 @@
+ # define _GL_HAS_BUILTIN_MUL_OVERFLOW _GL_HAS_BUILTIN_ADD_OVERFLOW
+ #endif
+ 
+-/* True if __builtin_add_overflow_p (A, B, C) works, and similarly for
+-   __builtin_mul_overflow_p and __builtin_mul_overflow_p.  */
 -#define _GL_HAS_BUILTIN_OVERFLOW_P (7 <= __GNUC__)
 -
  /* The _GL*_OVERFLOW macros have the same restrictions as the
@@ -37,9 +52,10 @@
  # define _GL_ADD_OVERFLOW(a, b, min, max)                               \
     __builtin_add_overflow_p (a, b, (__typeof__ ((a) + (b))) 0)
  # define _GL_SUBTRACT_OVERFLOW(a, b, min, max)                          \
---- coreutils-8.28/lib/xalloc-oversized.h.omv~	2017-10-30 17:19:47.020513923 +0100
-+++ coreutils-8.28/lib/xalloc-oversized.h	2017-10-30 17:31:11.728518085 +0100
-@@ -41,7 +41,7 @@ typedef size_t __xalloc_count_type;
+diff -Naur coreutils-8.32/lib/xalloc-oversized.h coreutils-8.32.tpg/lib/xalloc-oversized.h
+--- coreutils-8.32/lib/xalloc-oversized.h	2020-01-01 14:14:24.000000000 +0000
++++ coreutils-8.32.tpg/lib/xalloc-oversized.h	2020-03-14 11:52:03.637075864 +0000
+@@ -41,7 +41,7 @@
     positive and N must be nonnegative.  This is a macro, not a
     function, so that it works correctly even when SIZE_MAX < N.  */
  
@@ -48,14 +64,3 @@
  # define xalloc_oversized(n, s) \
     __builtin_mul_overflow_p (n, s, (__xalloc_count_type) 1)
  #elif 5 <= __GNUC__ && !defined __ICC && !__STRICT_ANSI__
---- coreutils-8.28/lib/fts.c.omv~	2017-10-30 17:37:28.365434308 +0100
-+++ coreutils-8.28/lib/fts.c	2017-10-30 17:39:33.481075235 +0100
-@@ -199,7 +199,7 @@ enum Fts_stat
- #endif
- 
- #ifndef FALLTHROUGH
--# if __GNUC__ < 7
-+# if __GNUC__ < 7 || !__has_attribute(__fallthrough__)
- #  define FALLTHROUGH ((void) 0)
- # else
- #  define FALLTHROUGH __attribute__ ((__fallthrough__))
