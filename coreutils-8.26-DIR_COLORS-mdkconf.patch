@@ -126,7 +126,7 @@ diff -Naur coreutils-8.32/src/dircolors.hin coreutils-8.32.tpg/src/dircolors.hin
 +# .cfg 01;37;40
 +# .config 01;37;40
 +# .ini 01;37;40
-++.spec 01;37;40
++.spec 01;37;40
 +# .log 01;37;40
 +# .c 01;37;40
 +# .cpp 01;37;40
