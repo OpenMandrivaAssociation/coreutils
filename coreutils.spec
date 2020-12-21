@@ -14,7 +14,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.32
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -80,6 +80,12 @@ Patch2114:	coreutils-i18n-fold-newline.patch
 Patch2115:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-if-lint.patch
 # ls: restore 8.31 behavior on removed directories
 Patch2116:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-ls-removed-dir.patch
+# cp: default to --reflink=auto
+Patch2117:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-cp-reflink-auto.patch
+# df,stat,tail: recognize more file system types
+Patch2118:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-new-fs-types.patch
+# rm: do not skip files upon failure to remove an empty dir
+Patch2119:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-rm-stray-skip.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
