@@ -14,7 +14,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	8.32
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -86,6 +86,20 @@ Patch2117:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8
 Patch2118:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-new-fs-types.patch
 # rm: do not skip files upon failure to remove an empty dir
 Patch2119:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-rm-stray-skip.patch
+# expr: fix invalid read with unmatched \(...\) (#1919775)
+Patch2120:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-expr-unmatched-par.patch
+# split: fix --number=K/N to output correct part of file (#1921246)
+Patch2121:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-split-number.patch
+# ls: fix crash printing SELinux context for unstatable files (#1921249)
+Patch2122:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-ls-scontext-crash.patch
+# stat: add support for the exfat file system (#1921427)
+Patch2123:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-stat-exfat.patch
+# cp: use copy_file_range if available
+Patch2124:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-cp-file-range.patch
+# hostname,ln: fix memory leaks detected by Coverity
+Patch2125:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-mem-leaks.patch
+# utimens: fix confusing arg type in internal func
+Patch2126:	https://src.fedoraproject.org/rpms/coreutils/raw/master/f/coreutils-8.32-coverity-utimens.patch
 
 #getgrouplist() patch from Ulrich Drepper.
 Patch2908:	coreutils-8.14-getgrouplist.patch
