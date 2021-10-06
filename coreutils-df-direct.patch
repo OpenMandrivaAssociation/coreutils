@@ -1,8 +1,20 @@
+From 6e36198f10a2f63b89c89ebb5d5c185b20fb3a63 Mon Sep 17 00:00:00 2001
+From: Kamil Dudka <kdudka@redhat.com>
+Date: Mon, 29 Mar 2010 17:20:34 +0000
+Subject: [PATCH] coreutils-df-direct.patch
+
+---
+ doc/coreutils.texi |  7 ++++++
+ src/df.c           | 36 ++++++++++++++++++++++++++++--
+ tests/df/direct.sh | 55 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 96 insertions(+), 2 deletions(-)
+ create mode 100755 tests/df/direct.sh
+
 diff --git a/doc/coreutils.texi b/doc/coreutils.texi
-index a507280..400e135 100644
+index 5b9a597..6810c15 100644
 --- a/doc/coreutils.texi
 +++ b/doc/coreutils.texi
-@@ -11303,6 +11303,13 @@ some systems (notably SunOS), doing this yields more up to date results,
+@@ -12067,6 +12067,13 @@ some systems (notably Solaris), doing this yields more up to date results,
  but in general this option makes @command{df} much slower, especially when
  there are many or very busy file systems.
  
@@ -15,12 +27,12 @@ index a507280..400e135 100644
 +
  @item --total
  @opindex --total
- @cindex grand total of disk size, usage and available space
+ @cindex grand total of file system size, usage and available space
 diff --git a/src/df.c b/src/df.c
-index 8f760db..a7385fd 100644
+index 48025b9..c8efa5b 100644
 --- a/src/df.c
 +++ b/src/df.c
-@@ -120,6 +120,9 @@ static bool print_type;
+@@ -125,6 +125,9 @@ static bool print_type;
  /* If true, print a grand total at the end.  */
  static bool print_grand_total;
  
@@ -30,7 +42,7 @@ index 8f760db..a7385fd 100644
  /* Grand total data.  */
  static struct fs_usage grand_fsu;
  
-@@ -247,13 +250,15 @@ enum
+@@ -252,13 +255,15 @@ enum
    NO_SYNC_OPTION = CHAR_MAX + 1,
    SYNC_OPTION,
    TOTAL_OPTION,
@@ -47,7 +59,7 @@ index 8f760db..a7385fd 100644
    {"inodes", no_argument, NULL, 'i'},
    {"human-readable", no_argument, NULL, 'h'},
    {"si", no_argument, NULL, 'H'},
-@@ -509,7 +514,10 @@ get_header (void)
+@@ -583,7 +588,10 @@ get_header (void)
    for (col = 0; col < ncolumns; col++)
      {
        char *cell = NULL;
@@ -59,7 +71,7 @@ index 8f760db..a7385fd 100644
  
        if (columns[col]->field == SIZE_FIELD
            && (header_mode == DEFAULT_MODE
-@@ -1397,6 +1405,19 @@ get_point (const char *point, const struct stat *statp)
+@@ -1486,6 +1494,19 @@ get_point (char const *point, const struct stat *statp)
  static void
  get_entry (char const *name, struct stat const *statp)
  {
@@ -77,9 +89,9 @@ index 8f760db..a7385fd 100644
 +    }
 +
    if ((S_ISBLK (statp->st_mode) || S_ISCHR (statp->st_mode))
-       && get_disk (name))
+       && get_device (name))
      return;
-@@ -1467,6 +1488,7 @@ or all file systems by default.\n\
+@@ -1556,6 +1577,7 @@ or all file systems by default.\n\
    -B, --block-size=SIZE  scale sizes by SIZE before printing them; e.g.,\n\
                             '-BM' prints sizes in units of 1,048,576 bytes;\n\
                             see SIZE format below\n\
@@ -87,7 +99,7 @@ index 8f760db..a7385fd 100644
    -h, --human-readable  print sizes in powers of 1024 (e.g., 1023M)\n\
    -H, --si              print sizes in powers of 1000 (e.g., 1.1G)\n\
  "), stdout);
-@@ -1557,6 +1579,9 @@ main (int argc, char **argv)
+@@ -1646,6 +1668,9 @@ main (int argc, char **argv)
                xstrtol_fatal (e, oi, c, long_options, optarg);
            }
            break;
@@ -97,7 +109,7 @@ index 8f760db..a7385fd 100644
          case 'i':
            if (header_mode == OUTPUT_MODE)
              {
-@@ -1653,6 +1678,13 @@ main (int argc, char **argv)
+@@ -1742,6 +1767,13 @@ main (int argc, char **argv)
          }
      }
  
@@ -172,3 +184,6 @@ index 0000000..8e4cfb8
 +compare file_out file_exp || fail=1
 +
 +Exit $fail
+-- 
+2.31.1
+

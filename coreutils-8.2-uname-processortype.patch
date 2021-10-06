@@ -1,7 +1,8 @@
-diff -urNp coreutils-8.2-orig/src/uname.c coreutils-8.2/src/uname.c
---- coreutils-8.2-orig/src/uname.c	2009-09-23 10:25:44.000000000 +0200
-+++ coreutils-8.2/src/uname.c	2009-12-19 09:09:11.663607110 +0100
-@@ -301,7 +301,7 @@ main (int argc, char **argv)
+diff --git a/src/uname.c b/src/uname.c
+index 6371ca2..1ad8fd7 100644
+--- a/src/uname.c
++++ b/src/uname.c
+@@ -300,13 +300,19 @@ main (int argc, char **argv)
  
    if (toprint & PRINT_PROCESSOR)
      {
@@ -10,20 +11,19 @@ diff -urNp coreutils-8.2-orig/src/uname.c coreutils-8.2/src/uname.c
  #if HAVE_SYSINFO && defined SI_ARCHITECTURE
        {
          static char processor[257];
-@@ -308,6 +308,12 @@ main (int argc, char **argv)
          if (0 <= sysinfo (SI_ARCHITECTURE, processor, sizeof processor))
            element = processor;
        }
 +#else
 +      {
-+	struct utsname u;
++	static struct utsname u;
 +	uname(&u);
 +	element = u.machine;
 +      }
  #endif
  #ifdef UNAME_PROCESSOR
        if (element == unknown)
-@@ -351,7 +357,7 @@ main (int argc, char **argv)
+@@ -344,7 +350,7 @@ main (int argc, char **argv)
  
    if (toprint & PRINT_HARDWARE_PLATFORM)
      {
@@ -32,13 +32,13 @@ diff -urNp coreutils-8.2-orig/src/uname.c coreutils-8.2/src/uname.c
  #if HAVE_SYSINFO && defined SI_PLATFORM
        {
          static char hardware_platform[257];
-@@ -353,6 +359,14 @@ main (int argc, char **argv)
+@@ -352,6 +358,14 @@ main (int argc, char **argv)
                            hardware_platform, sizeof hardware_platform))
            element = hardware_platform;
        }
 +#else
 +      {
-+	struct utsname u;
++	static struct utsname u;
 +	uname(&u);
 +	element = u.machine;
 +	if(strlen(element)==4 && element[0]=='i' && element[2]=='8' && element[3]=='6')

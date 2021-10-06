@@ -1,7 +1,7 @@
 # color-ls initialization
 
 # Skip all for noninteractive shells.
-[ -z "$PS1" ] && return
+[ ! -t 0 ] && return
 
 #when USER_LS_COLORS defined do not override user LS_COLORS, but use them.
 if [ -z "$USER_LS_COLORS" ]; then
@@ -15,16 +15,12 @@ if [ -z "$USER_LS_COLORS" ]; then
   for colors in "$HOME/.dir_colors.$TERM" "$HOME/.dircolors.$TERM" \
       "$HOME/.dir_colors" "$HOME/.dircolors"; do
     [ -e "$colors" ] && COLORS="$colors" && \
-    INCLUDE="`cat "$COLORS" | grep '^INCLUDE' | cut -d ' ' -f2-`" && \
+    INCLUDE="`/usr/bin/cat "$COLORS" | /usr/bin/grep '^INCLUDE' | /usr/bin/cut -d ' ' -f2-`" && \
     break
   done
 
   [ -z "$COLORS" ] && [ -e "/etc/DIR_COLORS.$TERM" ] && \
   COLORS="/etc/DIR_COLORS.$TERM"
-
-  [ -z "$COLORS" ] && [ -e "/etc/DIR_COLORS.256color" ] && \
-  [ "x`tty -s && tput colors 2>/dev/null`" = "x256" ] && \
-  COLORS="/etc/DIR_COLORS.256color"
 
   [ -z "$COLORS" ] && [ -e "/etc/DIR_COLORS" ] && \
   COLORS="/etc/DIR_COLORS"
@@ -32,17 +28,22 @@ if [ -z "$USER_LS_COLORS" ]; then
   # Existence of $COLORS already checked above.
   [ -n "$COLORS" ] || return
 
-  TMP="`mktemp .colorlsXXX --tmpdir=/tmp`"
+  if [ -e "$INCLUDE" ];
+  then
+    TMP="`/usr/bin/mktemp .colorlsXXX -q --tmpdir=/tmp`"
+    [ -z "$TMP" ] && return
 
-  [ -e "$INCLUDE" ] && cat "$INCLUDE" >> $TMP
-  grep -v '^INCLUDE' "$COLORS" >> $TMP
+    /usr/bin/cat "$INCLUDE" >> $TMP
+    /usr/bin/grep -v '^INCLUDE' "$COLORS" >> $TMP
 
-  eval "`dircolors --sh $TMP 2>/dev/null`"
-
-  rm -f $TMP
+    eval "`/usr/bin/dircolors --sh $TMP 2>/dev/null`"
+    /usr/bin/rm -f $TMP
+  else
+    eval "`/usr/bin/dircolors --sh $COLORS 2>/dev/null`"
+  fi
 
   [ -z "$LS_COLORS" ] && return
-  grep -qi "^COLOR.*none" $COLORS >/dev/null 2>/dev/null && return
+  /usr/bin/grep -qi "^COLOR.*none" $COLORS >/dev/null 2>/dev/null && return
 fi
 
 unset TMP COLORS INCLUDE
