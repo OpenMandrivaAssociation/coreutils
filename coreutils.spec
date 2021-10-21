@@ -9,7 +9,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	9.0
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -140,7 +140,7 @@ export ac_cv_func_lchmod="no"
 mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
 
 # chroot was in /usr/sbin :
-mv %{buildroot}{%{_bindir},%{_sbindir}}/chroot
+ln -sf %{_bindir}/coreutils %{buildroot}%{_sbindir}/chroot
 
 # (tpg) keep compat symlinks
 for f in $(ls %{buildroot}%{_bindir}); do
