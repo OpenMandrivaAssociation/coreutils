@@ -165,8 +165,6 @@ grep LC_TIME %{name}.lang | cut -d'/' -f1-6 | sed -e 's/) /) %%dir /g' >>%{name}
 /bin/*
 %{_bindir}/*
 %{_sbindir}/chroot
-%dir %{_libexecdir}/coreutils
-%{_libexecdir}/coreutils/libstdbuf.so
 
 %files doc
 %doc ABOUT-NLS ChangeLog.xz NEWS THANKS TODO README
