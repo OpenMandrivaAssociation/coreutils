@@ -9,7 +9,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	9.0
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -154,6 +154,9 @@ install -p -c -m644 %{SOURCE2} %{buildroot}%{_sysconfdir}/profile.d/colorls.csh
 
 # (tpg) compress these files
 xz --text ChangeLog
+
+# Fix conflict with glibc
+rm -rf %{buildroot}%{_datadir}/locale/pt_BR/LC_TIME
 
 %find_lang %{name}
 # Add the %%lang(xyz) ownership for the LC_TIME dirs as well...
