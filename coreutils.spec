@@ -8,8 +8,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.0
-Release:	4
+Version:	9.1
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -18,9 +18,9 @@ Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
 Patch0:		coreutils-9.0-clang.patch
 
-# chmod: fix exit status when ignoring symlinks
-Patch1:		coreutils-9.0-chmod-symlink.patch
-
+# Make simple backups in correct dir; broken in 9.1            
+Patch1:	gnulib-simple-backup-fix.patch
+					
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
 
@@ -38,7 +38,6 @@ Patch107:	coreutils-8.4-mkdir-modenote.patch
 # sh-utils
 #add info about TZ envvar to date manpage
 Patch703:	sh-utils-2.0.11-dateman.patch
-Patch713:	coreutils-4.5.3-langinfo.patch
 
 # (sb) lin18nux/lsb compliance - multibyte functionality patch
 Patch800:	coreutils-i18n.patch
