@@ -159,3 +159,20 @@ rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
 %doc ABOUT-NLS ChangeLog.xz NEWS THANKS TODO README
 %{_infodir}/coreutils*
 %{_mandir}/man*/*
+
+%post
+# FIXME this is a temporary workaround to keep
+# /bin/rm hardcodes etc. working during the
+# usrmerge transition.
+# This has to go as soon as we can be reasonably
+# sure /bin is a symlink.
+# We can't just package the symlinks as we usually
+# would because that will wreak havoc on systems
+# where /bin already is a symlink (owning 2 conflicting
+# files)
+if test -d /bin; then
+	sln /usr/bin/coreutils /bin/
+	for i in cat chgrp chmod chown chroot coreutils cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
+		sln /bin/coreutils /bin/$i
+	done
+fi
