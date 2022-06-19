@@ -117,6 +117,7 @@ autoreconf -fiv
 export ac_cv_func_lchmod="no"
 
 %configure \
+	--bindir=/bin \
 	--enable-largefile \
 	--enable-no-install-program=hostname,uptime,kill \
 	--enable-install-program=arch \
@@ -151,7 +152,7 @@ rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
 %files -f %{name}.lang
 %config(noreplace) %{_sysconfdir}/DIR_COLORS*
 %config(noreplace) %{_sysconfdir}/profile.d/*
-%{_bindir}/*
+/bin/*
 %dir %{_libexecdir}/coreutils
 %{_libexecdir}/coreutils/libstdbuf.so
 
