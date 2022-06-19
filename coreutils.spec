@@ -9,7 +9,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	9.1
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -19,7 +19,7 @@ Source2:	coreutils-colorls.csh
 Patch0:		coreutils-9.0-clang.patch
 
 # Make simple backups in correct dir; broken in 9.1            
-Patch1:	gnulib-simple-backup-fix.patch
+Patch1:		gnulib-simple-backup-fix.patch
 					
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
@@ -135,17 +135,6 @@ export ac_cv_func_lchmod="no"
 %install
 %make_install
 
-# let be compatible with old fileutils, sh-utils and textutils packages :
-mkdir -p %{buildroot}{/bin,%{_bindir},%{_sbindir}}
-
-# chroot was in /usr/sbin :
-ln -sf %{_bindir}/coreutils %{buildroot}%{_sbindir}/chroot
-
-# (tpg) keep compat symlinks
-for f in $(ls %{buildroot}%{_bindir}); do
-    ln -sf %{_bindir}/$f %{buildroot}/bin/$f ;
-done
-
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 install -p -c -m644 DIR_COLORS{,.lightbgcolor} %{buildroot}%{_sysconfdir}
 install -p -c -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/profile.d/colorls.sh
@@ -162,9 +151,7 @@ rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
 %files -f %{name}.lang
 %config(noreplace) %{_sysconfdir}/DIR_COLORS*
 %config(noreplace) %{_sysconfdir}/profile.d/*
-/bin/*
 %{_bindir}/*
-%{_sbindir}/chroot
 %dir %{_libexecdir}/coreutils
 %{_libexecdir}/coreutils/libstdbuf.so
 
