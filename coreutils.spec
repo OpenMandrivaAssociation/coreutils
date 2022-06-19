@@ -171,8 +171,20 @@ rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
 # where /bin already is a symlink (owning 2 conflicting
 # files)
 if test -d /bin; then
-	sln /usr/bin/coreutils /bin/
-	for i in cat chgrp chmod chown chroot coreutils cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
+	sln /usr/bin/coreutils /bin/coreutils
+	for i in cat chgrp chmod chown chroot cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
+		sln /bin/coreutils /bin/$i
+	done
+fi
+
+%posttrans
+# Needed here again, in case our newly placed (in %%post)
+# symlinks were removed again by uninstalling the
+# previous version of coreutils
+# (which owned those files)
+if test -d /bin; then
+	sln /usr/bin/coreutils /bin/coreutils
+	for i in cat chgrp chmod chown chroot cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
 		sln /bin/coreutils /bin/$i
 	done
 fi
