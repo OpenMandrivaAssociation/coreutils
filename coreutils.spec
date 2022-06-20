@@ -9,7 +9,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	9.1
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -172,7 +172,7 @@ rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
 # would because that will wreak havoc on systems
 # where /bin already is a symlink (owning 2 conflicting
 # files)
-if test -d /bin; then
+if test -d /bin -a ! -h /bin; then
 	sln /usr/bin/coreutils /bin/coreutils
 	for i in cat chgrp chmod chown chroot cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
 		sln /bin/coreutils /bin/$i
@@ -184,7 +184,7 @@ fi
 # symlinks were removed again by uninstalling the
 # previous version of coreutils
 # (which owned those files)
-if test -d /bin; then
+if test -d /bin -a ! -h /bin; then
 	sln /usr/bin/coreutils /bin/coreutils
 	for i in cat chgrp chmod chown chroot cp cut date echo expr false head id install ln ls mkdir mknod mktemp mv readlink realpath rm rmdir sleep sort stat tail tee test touch tr true uname uniq unlink yes; do
 		sln /bin/coreutils /bin/$i
