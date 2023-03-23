@@ -1,7 +1,7 @@
-diff -Naur coreutils-9.0/lib/cdefs.h coreutils-9.0.tpg/lib/cdefs.h
---- coreutils-9.0/lib/cdefs.h	2021-09-24 11:32:44.000000000 +0000
-+++ coreutils-9.0.tpg/lib/cdefs.h	2021-10-21 17:03:44.516356057 +0000
-@@ -615,7 +615,7 @@
+diff -Naur coreutils-9.2/lib/cdefs.h coreutils-9.2.tpg/lib/cdefs.h
+--- coreutils-9.2/lib/cdefs.h	2023-03-13 18:12:12.000000000 +0000
++++ coreutils-9.2.tpg/lib/cdefs.h	2023-03-31 13:07:18.526309054 +0000
+@@ -693,7 +693,7 @@
  #  define __attr_access_none(argno)
  #endif
  
@@ -10,21 +10,21 @@ diff -Naur coreutils-9.0/lib/cdefs.h coreutils-9.0.tpg/lib/cdefs.h
  /* Designates dealloc as a function to call to deallocate objects
     allocated by the declared function.  */
  # define __attr_dealloc(dealloc, argno) \
-diff -Naur coreutils-9.0/lib/config.hin coreutils-9.0.tpg/lib/config.hin
---- coreutils-9.0/lib/config.hin	2021-09-24 11:34:56.000000000 +0000
-+++ coreutils-9.0.tpg/lib/config.hin	2021-10-21 17:00:58.527262886 +0000
-@@ -3778,7 +3778,7 @@
-    _GL_ATTRIBUTE_DEALLOC_FREE declares that the function returns pointers that
+diff -Naur coreutils-9.2/lib/config.hin coreutils-9.2.tpg/lib/config.hin
+--- coreutils-9.2/lib/config.hin	2023-03-20 13:01:08.000000000 +0000
++++ coreutils-9.2.tpg/lib/config.hin	2023-03-31 13:07:42.866204072 +0000
+@@ -4017,7 +4017,7 @@
     can be freed via 'free'; it can be used only after declaring 'free'.  */
  /* Applies to: functions.  Cannot be used on inline functions.  */
--#if _GL_GNUC_PREREQ (11, 0)
-+#if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
- # define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
- #else
- # define _GL_ATTRIBUTE_DEALLOC(f, i)
-diff -Naur coreutils-9.0/lib/dirent.in.h coreutils-9.0.tpg/lib/dirent.in.h
---- coreutils-9.0/lib/dirent.in.h	2021-09-24 11:32:44.000000000 +0000
-+++ coreutils-9.0.tpg/lib/dirent.in.h	2021-10-21 16:59:54.267772310 +0000
+ #ifndef _GL_ATTRIBUTE_DEALLOC
+-# if _GL_GNUC_PREREQ (11, 0)
++# if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
+ #  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
+ # else
+ #  define _GL_ATTRIBUTE_DEALLOC(f, i)
+diff -Naur coreutils-9.2/lib/dirent.in.h coreutils-9.2.tpg/lib/dirent.in.h
+--- coreutils-9.2/lib/dirent.in.h	2023-03-13 18:12:12.000000000 +0000
++++ coreutils-9.2.tpg/lib/dirent.in.h	2023-03-31 13:08:06.219436775 +0000
 @@ -59,7 +59,7 @@
     that can be freed by passing them as the Ith argument to the
     function F.  */
@@ -34,9 +34,9 @@ diff -Naur coreutils-9.0/lib/dirent.in.h coreutils-9.0.tpg/lib/dirent.in.h
  #  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
  # else
  #  define _GL_ATTRIBUTE_DEALLOC(f, i)
-diff -Naur coreutils-9.0/lib/stdio.in.h coreutils-9.0.tpg/lib/stdio.in.h
---- coreutils-9.0/lib/stdio.in.h	2021-09-24 11:32:44.000000000 +0000
-+++ coreutils-9.0.tpg/lib/stdio.in.h	2021-10-21 17:04:39.576163403 +0000
+diff -Naur coreutils-9.2/lib/stdio.in.h coreutils-9.2.tpg/lib/stdio.in.h
+--- coreutils-9.2/lib/stdio.in.h	2023-03-13 18:12:12.000000000 +0000
++++ coreutils-9.2.tpg/lib/stdio.in.h	2023-03-31 13:08:24.252692465 +0000
 @@ -95,7 +95,7 @@
     that can be freed by passing them as the Ith argument to the
     function F.  */
@@ -46,9 +46,9 @@ diff -Naur coreutils-9.0/lib/stdio.in.h coreutils-9.0.tpg/lib/stdio.in.h
  #  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
  # else
  #  define _GL_ATTRIBUTE_DEALLOC(f, i)
-diff -Naur coreutils-9.0/lib/stdlib.in.h coreutils-9.0.tpg/lib/stdlib.in.h
---- coreutils-9.0/lib/stdlib.in.h	2021-09-24 11:32:44.000000000 +0000
-+++ coreutils-9.0.tpg/lib/stdlib.in.h	2021-10-21 17:01:35.437013599 +0000
+diff -Naur coreutils-9.2/lib/stdlib.in.h coreutils-9.2.tpg/lib/stdlib.in.h
+--- coreutils-9.2/lib/stdlib.in.h	2023-03-13 18:12:12.000000000 +0000
++++ coreutils-9.2.tpg/lib/stdlib.in.h	2023-03-31 13:08:48.882586503 +0000
 @@ -103,7 +103,7 @@
     that can be freed by passing them as the Ith argument to the
     function F.  */
@@ -58,15 +58,15 @@ diff -Naur coreutils-9.0/lib/stdlib.in.h coreutils-9.0.tpg/lib/stdlib.in.h
  #  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
  # else
  #  define _GL_ATTRIBUTE_DEALLOC(f, i)
-diff -Naur coreutils-9.0/m4/gnulib-common.m4 coreutils-9.0.tpg/m4/gnulib-common.m4
---- coreutils-9.0/m4/gnulib-common.m4	2021-09-24 11:32:44.000000000 +0000
-+++ coreutils-9.0.tpg/m4/gnulib-common.m4	2021-10-21 16:59:09.158192885 +0000
-@@ -176,7 +176,7 @@
-    _GL_ATTRIBUTE_DEALLOC_FREE declares that the function returns pointers that
+diff -Naur coreutils-9.2/m4/gnulib-common.m4 coreutils-9.2.tpg/m4/gnulib-common.m4
+--- coreutils-9.2/m4/gnulib-common.m4	2023-03-13 18:12:12.000000000 +0000
++++ coreutils-9.2.tpg/m4/gnulib-common.m4	2023-03-31 13:09:13.289148261 +0000
+@@ -194,7 +194,7 @@
     can be freed via 'free'; it can be used only after declaring 'free'.  */
  /* Applies to: functions.  Cannot be used on inline functions.  */
--#if _GL_GNUC_PREREQ (11, 0)
-+#if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
- # define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
- #else
- # define _GL_ATTRIBUTE_DEALLOC(f, i)
+ #ifndef _GL_ATTRIBUTE_DEALLOC
+-# if _GL_GNUC_PREREQ (11, 0)
++# if _GL_GNUC_PREREQ (11, 0) && !defined(__clang__)
+ #  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
+ # else
+ #  define _GL_ATTRIBUTE_DEALLOC(f, i)

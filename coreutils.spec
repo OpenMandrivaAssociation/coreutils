@@ -8,8 +8,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.1
-Release:	4
+Version:	9.2
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -18,14 +18,11 @@ Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
 Patch0:		coreutils-9.0-clang.patch
 
-# Make simple backups in correct dir; broken in 9.1            
-Patch1:		gnulib-simple-backup-fix.patch
-					
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
 
 # downstream changes to default DIR_COLORS
-Patch102:	coreutils-8.32-DIR_COLORS.patch
+Patch102:	https://src.fedoraproject.org/rpms/coreutils/raw/rawhide/f/coreutils-8.32-DIR_COLORS.patch
 
 #do display processor type for uname -p/-i based on uname(2) syscall
 Patch103:	coreutils-8.2-uname-processortype.patch
@@ -41,9 +38,6 @@ Patch703:	sh-utils-2.0.11-dateman.patch
 
 # (sb) lin18nux/lsb compliance - multibyte functionality patch
 Patch800:	coreutils-i18n.patch
-
-#getgrouplist() patch from Ulrich Drepper.
-Patch908:	coreutils-getgrouplist.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
