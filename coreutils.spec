@@ -8,7 +8,7 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.3
+Version:	9.4
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -123,6 +123,7 @@ export ac_cv_func_lchmod="no"
 	--enable-single-binary=symlinks \
 	--without-openssl \
 	--with-tty-group \
+	--enable-systemd \
 	DEFAULT_POSIX2_VERSION=200112 alternative=199209
 
 %make_build
