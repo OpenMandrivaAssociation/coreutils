@@ -37,7 +37,7 @@ Patch107:	coreutils-8.4-mkdir-modenote.patch
 Patch703:	sh-utils-2.0.11-dateman.patch
 
 # (sb) lin18nux/lsb compliance - multibyte functionality patch
-Patch800:	coreutils-i18n.patch
+Patch800:	https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.4-i18n-1.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
