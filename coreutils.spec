@@ -9,7 +9,7 @@
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
 Version:	9.4
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -17,6 +17,7 @@ Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
 Patch0:		coreutils-9.0-clang.patch
+Patch1:		coreutils-9.4-clang-18.patch
 
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
