@@ -8,8 +8,8 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.4
-Release:	2
+Version:	9.5
+Release:	1
 License:	GPLv3+
 Group:		System/Base
 Url:		http://www.gnu.org/software/coreutils/
@@ -17,7 +17,6 @@ Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
 Patch0:		coreutils-9.0-clang.patch
-Patch1:		coreutils-9.4-clang-18.patch
 
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
@@ -38,7 +37,8 @@ Patch107:	coreutils-8.4-mkdir-modenote.patch
 Patch703:	sh-utils-2.0.11-dateman.patch
 
 # (sb) lin18nux/lsb compliance - multibyte functionality patch
-Patch800:	https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.4-i18n-1.patch
+# FIXME restore when ported
+#Patch800:	https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.5-i18n-1.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
