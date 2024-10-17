@@ -12,7 +12,7 @@ Version:	9.5
 Release:	1
 License:	GPLv3+
 Group:		System/Base
-Url:		http://www.gnu.org/software/coreutils/
+Url:		https://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
