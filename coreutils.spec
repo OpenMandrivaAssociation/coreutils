@@ -58,6 +58,8 @@ Provides:	/bin/env
 Provides:	%{_bindir}/tr
 Provides:	/bin/false
 Provides:	/bin/true
+Provides:	%{_bindir}/true
+Provides:	%{_bindir}/false
 Obsoletes:	base64 < 9.0
 Suggests:	coreutils-doc
 Conflicts:	util-linux < 2.23.1-2
