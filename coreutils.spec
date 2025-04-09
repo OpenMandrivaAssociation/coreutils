@@ -8,7 +8,7 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.5
+Version:	9.7
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -16,7 +16,6 @@ Url:		https://www.gnu.org/software/coreutils/
 Source0:	http://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	coreutils-colorls.sh
 Source2:	coreutils-colorls.csh
-Patch0:		coreutils-9.0-clang.patch
 
 # disable the test-lock gnulib test prone to deadlock
 Patch100:	coreutils-8.26-test-lock.patch
@@ -50,6 +49,9 @@ BuildRequires:	pkgconfig(libattr)
 BuildRequires:	pkgconfig(libcap)
 BuildRequires:	hostname
 BuildRequires:	gettext-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	slibtool
 
 %rename		mktemp
 Provides:	stat = %{version}
@@ -110,7 +112,10 @@ sed src/dircolors.hin \
 find tests -name '*.sh' -perm 0644 -print -exec chmod 0755 '{}' '+'
 (echo "<<< done") 2>/dev/null
 
-autoreconf -fiv
+aclocal -I m4
+slibtoolize --force
+automake -a
+autoconf
 
 %build
 export ac_cv_func_lchmod="no"

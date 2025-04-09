@@ -1,19 +1,7 @@
-From 6e36198f10a2f63b89c89ebb5d5c185b20fb3a63 Mon Sep 17 00:00:00 2001
-From: Kamil Dudka <kdudka@redhat.com>
-Date: Mon, 29 Mar 2010 17:20:34 +0000
-Subject: [PATCH] coreutils-df-direct.patch
-
----
- doc/coreutils.texi |  7 ++++++
- src/df.c           | 36 ++++++++++++++++++++++++++++--
- tests/df/direct.sh | 55 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 96 insertions(+), 2 deletions(-)
- create mode 100755 tests/df/direct.sh
-
-diff -Naur coreutils-9.4/doc/coreutils.texi coreutils-9.4.tpg/doc/coreutils.texi
---- coreutils-9.4/doc/coreutils.texi	2023-08-29 11:39:27.000000000 +0000
-+++ coreutils-9.4.tpg/doc/coreutils.texi	2023-09-01 11:31:53.995889791 +0000
-@@ -12341,6 +12341,13 @@
+diff -up coreutils-9.7/doc/coreutils.texi.4~ coreutils-9.7/doc/coreutils.texi
+--- coreutils-9.7/doc/coreutils.texi.4~	2025-04-07 19:30:22.000000000 +0200
++++ coreutils-9.7/doc/coreutils.texi	2025-04-10 00:30:10.897532780 +0200
+@@ -12467,6 +12467,13 @@ some systems (notably Solaris), doing th
  but in general this option makes @command{df} much slower, especially when
  there are many or very busy file systems.
  
@@ -27,10 +15,10 @@ diff -Naur coreutils-9.4/doc/coreutils.texi coreutils-9.4.tpg/doc/coreutils.texi
  @item --total
  @opindex --total
  @cindex grand total of file system size, usage and available space
-diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
---- coreutils-9.4/src/df.c	2023-08-29 11:39:27.000000000 +0000
-+++ coreutils-9.4.tpg/src/df.c	2023-09-01 11:36:57.884878333 +0000
-@@ -123,6 +123,9 @@
+diff -up coreutils-9.7/src/df.c.4~ coreutils-9.7/src/df.c
+--- coreutils-9.7/src/df.c.4~	2025-02-03 14:48:01.000000000 +0100
++++ coreutils-9.7/src/df.c	2025-04-10 00:32:10.703345668 +0200
+@@ -122,6 +122,9 @@ static bool print_type;
  /* If true, print a grand total at the end.  */
  static bool print_grand_total;
  
@@ -40,7 +28,7 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
  /* Grand total data.  */
  static struct fs_usage grand_fsu;
  
-@@ -249,13 +252,15 @@
+@@ -249,13 +252,15 @@ enum
    NO_SYNC_OPTION = CHAR_MAX + 1,
    SYNC_OPTION,
    TOTAL_OPTION,
@@ -57,19 +45,19 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
    {"inodes", no_argument, nullptr, 'i'},
    {"human-readable", no_argument, nullptr, 'h'},
    {"si", no_argument, nullptr, 'H'},
-@@ -574,7 +579,10 @@
-   for (col = 0; col < ncolumns; col++)
+@@ -572,7 +577,10 @@ get_header (void)
+   for (idx_t col = 0; col < ncolumns; col++)
      {
-       char *cell = nullptr;
+       char *cell;
 -      char const *header = _(columns[col]->caption);
 +      char const *header = (columns[col]->field == TARGET_FIELD
 +                            && direct_statfs)?
-+                            _("File") :
-+                            _(columns[col]->caption);
++                           _("File") :
++                           _(columns[col]->caption);
  
        if (columns[col]->field == SIZE_FIELD
            && (header_mode == DEFAULT_MODE
-@@ -1471,6 +1479,19 @@
+@@ -1454,6 +1462,19 @@ get_point (char const *point, const stru
  static void
  get_entry (char const *name, struct stat const *statp)
  {
@@ -89,7 +77,7 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
    if ((S_ISBLK (statp->st_mode) || S_ISCHR (statp->st_mode))
        && get_device (name))
      return;
-@@ -1541,6 +1562,7 @@
+@@ -1524,6 +1545,7 @@ or all file systems by default.\n\
    -B, --block-size=SIZE  scale sizes by SIZE before printing them; e.g.,\n\
                             '-BM' prints sizes in units of 1,048,576 bytes;\n\
                             see SIZE format below\n\
@@ -97,7 +85,7 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
    -h, --human-readable  print sizes in powers of 1024 (e.g., 1023M)\n\
    -H, --si              print sizes in powers of 1000 (e.g., 1.1G)\n\
  "), stdout);
-@@ -1631,6 +1653,9 @@
+@@ -1618,6 +1640,9 @@ main (int argc, char **argv)
                xstrtol_fatal (e, oi, c, long_options, optarg);
            }
            break;
@@ -107,7 +95,7 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
          case 'i':
            if (header_mode == OUTPUT_MODE)
              {
-@@ -1727,6 +1752,13 @@
+@@ -1714,6 +1739,13 @@ main (int argc, char **argv)
          }
      }
  
@@ -121,9 +109,9 @@ diff -Naur coreutils-9.4/src/df.c coreutils-9.4.tpg/src/df.c
    if (human_output_opts == -1)
      {
        if (posix_format)
-diff -Naur coreutils-9.4/tests/df/direct.sh coreutils-9.4.tpg/tests/df/direct.sh
---- coreutils-9.4/tests/df/direct.sh	1970-01-01 00:00:00.000000000 +0000
-+++ coreutils-9.4.tpg/tests/df/direct.sh	2023-09-01 11:38:34.197889627 +0000
+diff -up coreutils-9.7/tests/df/direct.sh.4~ coreutils-9.7/tests/df/direct.sh
+--- coreutils-9.7/tests/df/direct.sh.4~	2025-04-10 00:30:10.899808128 +0200
++++ coreutils-9.7/tests/df/direct.sh	2025-04-10 00:30:10.899808128 +0200
 @@ -0,0 +1,55 @@
 +#!/bin/sh
 +# Ensure "df --direct" works as documented
@@ -180,5 +168,3 @@ diff -Naur coreutils-9.4/tests/df/direct.sh coreutils-9.4.tpg/tests/df/direct.sh
 +compare file_out file_exp || fail=1
 +
 +Exit $fail
---
-2.31.1
