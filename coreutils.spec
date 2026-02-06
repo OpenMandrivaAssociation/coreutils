@@ -53,6 +53,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	slibtool
+BuildRequires:	make
 
 %rename		mktemp
 Provides:	stat = %{version}
