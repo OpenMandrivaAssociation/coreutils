@@ -1,13 +1,12 @@
-diff --git a/doc/coreutils.texi b/doc/coreutils.texi
-index 400e135..47e4480 100644
---- a/doc/coreutils.texi
-+++ b/doc/coreutils.texi
-@@ -10829,6 +10829,8 @@ incorrect.  @xref{Directory Setuid and Setgid}, for how the
+diff -up coreutils-9.10/doc/coreutils.texi.5~ coreutils-9.10/doc/coreutils.texi
+--- coreutils-9.10/doc/coreutils.texi.5~	2026-02-06 19:46:27.058995847 +0100
++++ coreutils-9.10/doc/coreutils.texi	2026-02-06 19:48:11.135591505 +0100
+@@ -10812,6 +10812,8 @@ incorrect.  @xref{Directory Setuid and S
  set-user-ID and set-group-ID bits of directories are inherited unless
  overridden in this way.
  
 +Note: The @option{--mode},@option{-m} option only applies to the right-most directories listed on the command line.  When combined with @option{--parents}, @option{-p} option, any parent directories are created with @samp{u+wx} modified by umask.
 +
- @item -p
- @itemx --parents
- @opindex -p
+ @optItem{mkdir,-p,}
+ @optItemx{mkdir,--parents,}
+ @cindex parent directories, creating
