@@ -8,7 +8,7 @@
 
 Summary:	The GNU core utilities: a set of tools commonly used in shell scripts
 Name:		coreutils
-Version:	9.10
+Version:	9.11
 Release:	1
 License:	GPLv3+
 Group:		System/Base
@@ -39,7 +39,6 @@ Patch703:	sh-utils-2.0.11-dateman.patch
 # FIXME restore when ported
 #Patch800:	https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.5-i18n-1.patch
 
-BuildRequires:	libtool-base
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gettext
