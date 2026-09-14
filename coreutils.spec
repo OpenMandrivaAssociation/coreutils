@@ -147,7 +147,7 @@ install -p -c -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/profile.d/colorls.sh
 install -p -c -m644 %{SOURCE2} %{buildroot}%{_sysconfdir}/profile.d/colorls.csh
 
 # (tpg) compress these files
-xz --text ChangeLog
+xz ChangeLog
 
 # Fix conflicts with glibc
 rm -rf %{buildroot}%{_datadir}/locale/*/LC_TIME
